@@ -25,13 +25,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+//FIXME add elevator pitch here
 
 ### Design
 
 ![Design image](placeholder.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+//FIXME add the picture here
 
 ```mermaid
 sequenceDiagram
@@ -50,11 +50,14 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
+- **HTML** - Use HTML to properly structure the pages. //FIXME describe the pages
+- **CSS** - Create style sheets to give the application consistent, accessible styling that is visually pleasing, and ensure that the application looks correct at various sizes.
 - **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
+- **Service** - Backend service with endpoints for:
+    - login
+    - account creation
+    -//fixme :'(
+- **DB/Login** - Store user information credentials securely. Register users and authenticate login. //FIXME what else? what unless auth.?
 - **WebSocket** - Description here
 
 ## 🚀 AWS deliverable
