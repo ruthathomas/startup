@@ -1,31 +1,31 @@
-# Your startup name here
+# Bad Libs
 
 [My Notes](notes.md)
 
-A brief description of the application here. //fixme :)
+Bad Libs (name pending until I think of something better [i.e. something that either *isn't* a blatant rip-off of a copyrighted name, or is a cleverer rip-off]) is a realtime multiplayer online fill-in-the-blanks game. The template for the script is redacted during gameplay, allowing only the text boxes which need entry to be seen by players. Play is turn-based; a player may select any empty textbox and enter a word. After the word has been entered, the application automatically passes play to the next user (based on player ids handled on the backend). Once all words have been entered, the full text is revealed for the players to enjoy.
 
-> [!NOTE]
+<!-- > [!NOTE]
 > This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
 
 > [!NOTE]
-> If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
+> If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing. -->
 
 ## 🚀 Specification Deliverable
 
-> [!NOTE]
-> Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
+<!-- > [!NOTE]
+> Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration. -->
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
 - [x] Description of key features
 - [x] Description of how you will use each technology
 - [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-//fixme
+Are you tired of the classic fill-in-the-blanks game? Do your friends live too far away to play it with you? Bad Libs is a turn-based fill-in-the-blanks game that solves both of those problems. The game is hosted online, allowing friends to join from wherever they are; and, in a twist on the original game, the full script is kept a secret until every blank has been filled, making the reveal of the final story a fun surprise for everyone. Play is passed automatically from player to player, keeping the game fast-paced and enjoyable for all. Give Bad Libs a try to refresh your take on an old classic.
 
 ### Design
 
@@ -41,15 +41,15 @@ sequenceDiagram
     actor Betty
     actor Charlie
     Arnold->>Server: Arnold joined
-    Server->>Betty: Arnold joined
-    Server->>Charlie: Arnold joined
+    Server -->>Betty: Arnold joined
+    Server -->>Charlie: Arnold joined
     Charlie->>Server: new game template requested
-    Server->>Arnold: new game template returned
-    Server->>Betty: new game template returned
-    Server->>Charlie: new game template returned
+    Server -->>Arnold: new game template returned
+    Server -->>Betty: new game template returned
+    Server -->>Charlie: new game template returned
     Betty->>Server: Betty quit
-    Server->>Arnold: Betty quit
-    Server->>Charlie: Betty quit
+    Server -->>Arnold: Betty quit
+    Server -->>Charlie: Betty quit
 ```
 
 ### Key features
