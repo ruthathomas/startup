@@ -2,6 +2,9 @@
 
 [My startup - Simon](https://simon.cs260.click)
 
+> [!NOTE]
+> All of this is boilerplate :)
+
 ## Helpful links
 
 - [Course instruction](https://github.com/webprogramming260)
