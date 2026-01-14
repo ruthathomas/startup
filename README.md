@@ -19,32 +19,47 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [ ] Proper use of Markdown
 - [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
+- [x] Description of key features
+- [x] Description of how you will use each technology
 - [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-//FIXME add elevator pitch here
+//fixme
 
 ### Design
 
 ![Design image](startup_design_1st_pass.png)
 
-//FIXME add the picture here
+The layout in the diagrams above is a little cramped; this will be fixed in production.
+
+The following sequence diagram depicts a couple of ways in which the players might interact with the server.
 
 ```mermaid
 sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+    actor Arnold
+    actor Betty
+    actor Charlie
+    Arnold->>Server: Arnold joined
+    Server->>Betty: Arnold joined
+    Server->>Charlie: Arnold joined
+    Charlie->>Server: new game template requested
+    Server->>Arnold: new game template returned
+    Server->>Betty: new game template returned
+    Server->>Charlie: new game template returned
+    Betty->>Server: Betty quit
+    Server->>Arnold: Betty quit
+    Server->>Charlie: Betty quit
 ```
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Secure login over HTTPS
+- Live multiplayer gameplay (realtime updates of game state)
+- Realtime updates when players join or leave
+- Capability to create and join a game, allowing friends to play together
+- 'Play again' functionality allows for multiple games to be played with the same game code, allowing groups to play another game without the hassle of having to create a new game and join via a new code
+
 
 ### Technologies
 
@@ -54,7 +69,7 @@ I am going to use the required technologies in the following ways.
 - **CSS** - Create style sheets to give the application consistent, accessible styling that is visually pleasing, and ensure that the application looks correct at various sizes.
 - **React** - Provide login, joining a game, game display and update, etc.; will be used for routing and page components.
 - **Service** - Backend service with endpoints for:
-    - login
+    - login/logout
     - account creation
     - submitting game/player info
     - retrieving game/player info
