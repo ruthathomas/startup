@@ -21,7 +21,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] A concise and compelling elevator pitch
 - [ ] Description of key features
 - [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
@@ -29,7 +29,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](startup_design_1st_pass.png)
 
 //FIXME add the picture here
 
@@ -50,15 +50,16 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Use HTML to properly structure the pages. //FIXME describe the pages
+- **HTML** - Use HTML to properly structure the pages. The pages will include a login page (users login or create an account), a main page (players create a game, join a game, or logout), and a game page (users play the game).
 - **CSS** - Create style sheets to give the application consistent, accessible styling that is visually pleasing, and ensure that the application looks correct at various sizes.
-- **React** - Description here
+- **React** - Provide login, joining a game, game display and update, etc.; will be used for routing and page components.
 - **Service** - Backend service with endpoints for:
     - login
     - account creation
-    -//fixme :'(
-- **DB/Login** - Store user information credentials securely. Register users and authenticate login. //FIXME what else? what unless auth.?
-- **WebSocket** - Description here
+    - submitting game/player info
+    - retrieving game/player info
+- **DB/Login** - Store user information credentials securely. Store game templates and game/player information. Register users and authenticate login. Can't create/join a game unless authenticated.
+- **WebSocket** - Completed text box entries will be updated in real time for all players; players will be notified when another player joins or exits, and will be notified when it is their turn.
 
 ## 🚀 AWS deliverable
 
