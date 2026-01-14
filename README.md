@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-Bad Libs (name pending until I think of something better [i.e. something that either *isn't* a blatant rip-off of a copyrighted name, or is a cleverer rip-off]) is a realtime multiplayer online fill-in-the-blanks game. The template for the script is redacted during gameplay, allowing only the text boxes which need entry to be seen by players. Play is turn-based; a player may select any empty textbox and enter a word. After the word has been entered, the application automatically passes play to the next user (based on player ids handled on the backend). Once all words have been entered, the full text is revealed for the players to enjoy.
+Bad Libs (name pending until I think of something better [i.e. something that either *isn't* a blatant rip-off of a copyrighted name, or is a cleverer rip-off]) is a realtime multiplayer online fill-in-the-blanks game. The template for the script is redacted during gameplay, allowing only the text boxes which need entry to be seen by players. Play is turn-based. A player may select any empty textbox and enter a word; after the word has been entered, the application automatically passes play to the next user (based on player ids handled on the backend). Once all words have been entered, the full text is revealed for the players to enjoy.
 
 <!-- > [!NOTE]
 > This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
@@ -58,7 +58,7 @@ sequenceDiagram
 - Live multiplayer gameplay (realtime updates of game state)
 - Realtime updates when players join or leave
 - Capability to create and join a game, allowing friends to play together
-- 'Play again' functionality allows for multiple games to be played with the same game code, allowing groups to play another game without the hassle of having to create a new game and join via a new code
+- 'Play again' functionality allows for multiple games to be played with the same game code (functions as a 'room', reducing hassle when starting a new game with the same group)
 
 
 ### Technologies
