@@ -1,6 +1,6 @@
 # CS 260 Notes
 
-<!-- [My startup - Simon](https://simon.cs260.click) --> //FIXME; boilerplate has name of startup and link to it here, so you could do that too 
+[My startup - __ad Libs](http://ad-libs.click/)
 
 ## Helpful links
 
@@ -11,5 +11,8 @@
 
 ## AWS
 
-//FIXME; put something here
-
+- IP Address: 52.20.129.103
+- Command to ssh in: `ssh -i [key pair file] ubuntu@52.20.129.103`
+  - (remember that you're allowed to copy the path to the key pair file and just paste it in lol)
+- leave the server on!!
+- current base site is http://ad-libs.click/
