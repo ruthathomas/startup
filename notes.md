@@ -1,6 +1,6 @@
 # CS 260 Notes
 
-[My startup - __ad Libs](http://ad-libs.click/)
+[My startup - __ad Libs](https://startup.ad-libs.click/)
 
 ## Helpful links
 
@@ -15,4 +15,4 @@
 - Command to ssh in: `ssh -i [key pair file] ubuntu@52.20.129.103`
   - (remember that you're allowed to copy the path to the key pair file and just paste it in lol)
 - leave the server on!!
-- current base site is http://ad-libs.click/
+- current base site is https://ad-libs.click/
