@@ -23,9 +23,9 @@
 - I didn't know that `aside` was a thing -- maybe I should try using it??
 - remeber that `ol` means 'ordered list' and `ul` means 'unordered list' AND ALSO `li` is list item
 - [input elements reference sheet](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input)
-Except also, here is just this table of input elements because I wanted it here (FIXME make sure that you've got the markdown correct next time you push!!):
+<!-- Except also, here is just this table of input elements because I wanted it here (FIXME make sure that you've got the markdown correct next time you push!!):
 |Element|Meaning|Example|
-|---|---|---|
+|-------|-------|-------|
 |form*|Input container and submission|`<form action="form.html" method="post">`|
 |fieldset**|Labeled input grouping|`<fieldset> ... </fieldset>`|
 |input|Multiple types of user input (username, password, email, telephone...)|`<input type="" />`|
@@ -37,7 +37,7 @@ Except also, here is just this table of input elements because I wanted it here 
 |output|Output of input|`<output for="range">0</output>`|
 |meter**|Display value with a known range|`<meter min="0" max="100" value="50"></meter>`|
 *historically have had issues with this one
-**never heard of this one
+**never heard of this one -->
 - remember for input: `name`, `disabled`, `value`, `required` properties
 - `svg` and `canvas` are used to render images--can be animated
 - media path can be relative or full (relative must be from same location as the HTML page that's rendering the element)

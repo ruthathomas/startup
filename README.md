@@ -93,6 +93,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
             - meta (containing page default info)
             - title (containing page title)
         - body
+            - nav (only because it looked like we were required to use it? don't really like the way it looks though. will see what I think later)
             - div (for holding different pieces of each page; once I'm allowed to use CSS, my usage of these will change a bit, as I'd like to use flex/grid to make the layout closer to what I'd actually like the page to look like. I tried to only use a div element whenever necessary structurally)
             - h1
             - p
