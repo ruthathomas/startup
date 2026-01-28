@@ -41,3 +41,5 @@
 - remember for input: `name`, `disabled`, `value`, `required` properties
 - `svg` and `canvas` are used to render images--can be animated
 - media path can be relative or full (relative must be from same location as the HTML page that's rendering the element)
+- I don't really like the nav element?? but that's probably just because it's not styled yet. Once I add CSS I think I would like it better, but I suppose I'll just have to see
+- `<br/>` is like just a little line break and then `<hr/>` is a section break (it actually puts a line on the page)
