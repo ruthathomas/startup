@@ -86,15 +86,30 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I created three main HTML pages: the index page (login/register), the home page (create/join a game or logout), and the game page (play a game).
+- [x] **Proper HTML element usage** - I used the following elements:
+    - html (to contain the html page)
+        - head
+            - meta (containing page default info)
+            - title (containing page title)
+        - body
+            - div (for holding different pieces of each page; once I'm allowed to use CSS, my usage of these will change a bit, as I'd like to use flex/grid to make the layout closer to what I'd actually like the page to look like. I tried to only use a div element whenever necessary structurally)
+            - h1
+            - p
+            - span
+            - input (text entry, password)
+            - button
+            - form (for fetching the other html pages)
+        - footer
+            - a (for linking to my GitHub repo)
+        - br, hr, and em tags for basic html styling (will be adjusted once I can use CSS)
+- [x] **Links** - The login page links to the home page; the home page links to the login page and the game page; and the game page links to the home page.
 - [ ] **Text** - I did not complete this part of the deliverable.
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
 - [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **Login placeholder** - Input box for username/password, plus buttons for logging in/registering.
+- [x] **DB data placeholder** - The script on the gameplay page represents data pulled from the database.
+- [x] **WebSocket placeholder** - The text at the bottom of the gameplay page indicating whose turn it is and who has joined the game represent realtime gameplay information
 
 ## 🚀 CSS deliverable
 
