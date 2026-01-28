@@ -86,7 +86,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **HTML pages** - I created three main HTML pages: the index page (login/register), the home page (create/join a game or logout), and the game page (play a game).
+- [x] **HTML pages** - I created four main HTML pages: the index page (login/register), the home page (create/join a game or logout), the game page (play a game), and the animal page (has some animal pictures for general happiness). 
 - [x] **Proper HTML element usage** - I used the following elements:
     - html (to contain the html page)
         - head
@@ -103,13 +103,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
         - footer
             - a (for linking to my GitHub repo)
         - br, hr, and em tags for basic html styling (will be adjusted once I can use CSS)
-- [x] **Links** - The login page links to the home page; the home page links to the login page and the game page; and the game page links to the home page.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [x] **Login placeholder** - Input box for username/password, plus buttons for logging in/registering.
+- [x] **Links** - The login page links to the home page; the home page links to the login page, the game page, and the animal page; the animal page links to the home page; and the game page links to the home page. 
+- [x] **Text** - I've used text to display what the content of the application will be (seen best on the game page).
+- [x] **3rd party API placeholder** - The images on the animal page came from a service that I found listed under free APIs -- however, if they are insufficient, they can be used as a placeholder for me to include a more integrated API (there are other free APIs for free animal pictures haha).
+- [x] **Images** - There's an image of a dog and an image of a bear on the animal page.
+- [x] **Login placeholder** - Input box for username/password, plus buttons for logging in/registering. There is a text placeholder for the username on the home page.
 - [x] **DB data placeholder** - The script on the gameplay page represents data pulled from the database.
-- [x] **WebSocket placeholder** - The text at the bottom of the gameplay page indicating whose turn it is and who has joined the game represent realtime gameplay information
+- [x] **WebSocket placeholder** - The text at the bottom of the gameplay page indicating whose turn it is and who has joined the game represent realtime gameplay information.
 
 ## 🚀 CSS deliverable
 
