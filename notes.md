@@ -85,6 +85,7 @@ selector {
   - vh    (percentage of viewport's height)
   - vmin  (percentage of viewport's smaller dimension)
   - vmax  (percentage of viewport's larger dimension)
+  - fr    (fractional unit of the parent's total width)
 - for fonts:
 ```
 @font-face {
@@ -112,3 +113,18 @@ element {
 }
 ```
 - don't be a dummy -- debug it with the debug tools on the browser! guessing doesn't do a lot for you
+- `display` property used to change how an element is displayed (`none`, `block`, `inline`, `flex`, `grid`)
+- `float` property "moves an element to the left or right of its container element and allows inline elements to wrap around it"
+- `@media` selector can be used to tell "which side of the screen (technically the viewport) is the longest"
+```
+@media (orientation: portrait) {
+  div {
+    transform: rotate(180deg); //or whatever
+  }
+}
+```
+- for grid or flex, you need to make a container for the children and set that container's display property to flex or grid
+- some flex properties:
+  - flex-direction: (column or row)
+  - flex: growth-rate start-height
+- you can use bootstrap or tailwind for this project (I'll probably use tailwind because I'm more familiar with it)
