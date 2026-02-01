@@ -21,14 +21,41 @@ div {
     border-radius: 15px;
     border-style: none;
     padding: 1em;
+    margin: 1em;
 }
 
 button {
     color: #d0cbe0;
     background-color: #262237;
+    border-radius: 20px;
+    border-style: none;
+    padding: 0.75em 1em;
+    margin: 0em 0.5em 0em 0em;
+}
+
+input {
     border-radius: 15px;
     border-style: none;
-    padding: 0.5em;
+    padding: 0.25em;
+    margin: 0.25em;
+}
+
+/* class stuff */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.container div {
+    margin: 0.5em;
+    padding: 0em;
+}
+
+.container input {
+    padding: 0.25em;
+    margin: 0.5em;
 }
 
 /* #4C4661
