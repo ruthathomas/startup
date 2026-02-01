@@ -11,3 +11,26 @@
 * {
     font-family: "Special Elite";
 }
+
+body {
+    background-color: #4C4661;
+}
+
+div {
+    background-color: #817a9a;
+    border-radius: 15px;
+    border-style: none;
+    padding: 1em;
+}
+
+button {
+    color: #d0cbe0;
+    background-color: #262237;
+    border-radius: 15px;
+    border-style: none;
+    padding: 0.5em;
+}
+
+/* #4C4661
+   #39344B
+   #262237 */
