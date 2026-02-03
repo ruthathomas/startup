@@ -14,14 +14,43 @@
 
 body {
     background-color: #4C4661;
+    margin: 0rem;
+}
+
+nav {
+    display: flex;
+    color: #d0cbe0;
+    background-color: #262237;
+    justify-content: space-between;
+}
+
+nav > * {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+nav > a {
+    color: #d0cbe0;
+    text-decoration: none;
+    font-weight: bold;
+    align-self: center;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 0.25em;
+    border-color:#262237;
+}
+
+nav > a:hover {
+    background-color: #0d0b17;
+    border-color: #0d0b17;
 }
 
 div {
     background-color: #817a9a;
     border-radius: 15px;
     border-style: none;
-    padding: 1em;
-    margin: 1em;
+    padding: 1rem;
+    margin: 1rem;
 }
 
 button {
@@ -29,14 +58,14 @@ button {
     background-color: #262237;
     border-radius: 20px;
     border-style: none;
-    padding: 0.75em 1em;
+    padding: 0.75rem 1rem;
 }
 
 input {
     border-radius: 15px;
     border-style: none;
-    padding: 0.5em;
-    margin: 0.5em;
+    padding: 0.5rem;
+    margin: 0.5rem;
 }
 
 /* class stuff */
@@ -48,8 +77,8 @@ input {
 }
 
 .container div {
-    margin: 0em;
-    padding: 0em;
+    margin: 0rem;
+    padding: 0rem;
 }
 
 .test {
@@ -62,27 +91,27 @@ input {
 .test div {
     display: flex;
     flex-direction: row;
-    margin: 0em;
-    padding: 0.5em;
+    margin: 0rem;
+    padding: 0.5rem;
     justify-content: space-around;
 }
 
 .test form {
     display: flex;
     flex-direction: row;
-    margin: 0em;
-    padding: 0.5em;
+    margin: 0rem;
+    padding: 0.5rem;
     justify-content: space-around;
 }
 
 .test div > button {
     flex-grow: 1;
-    margin: 0em 0.5em;
+    margin: 0rem 0.5rem;
 }
 
 .test form > button {
     flex-grow: 1;
-    margin: 0em 0.5em;
+    margin: 0rem 0.5rem;
 }
 
 /* #4C4661
