@@ -40,6 +40,10 @@ nav > * {
     margin: 0.5rem;
 }
 
+nav > h2 {
+    flex: 1;
+}
+
 nav > a {
     color: #d0cbe0;
     text-decoration: none;
