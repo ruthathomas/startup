@@ -116,12 +116,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Visually appealing colors and layout. No overflowing elements.** - I did not complete this part of the deliverable.
-- [ ] **Use of a CSS framework** - I did not complete this part of the deliverable.
-- [ ] **All visual elements styled using CSS** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing using flexbox and/or grid display** - I did not complete this part of the deliverable.
-- [ ] **Use of a imported font** - I did not complete this part of the deliverable.
-- [ ] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I did not complete this part of the deliverable.
+- [x] **Visually appealing colors and layout. No overflowing elements.** - I used a monochromatic colorscheme and a mostly central composition for my pages. My elements don't overflow even when resized.
+- [x] **Use of a CSS framework** - I used bootstrap. It's being used for my navigation element (though I honestly liked my navigation element better before I used the bootstrap?? not sure exactly what it is that I'm being put off by though).
+- [x] **All visual elements styled using CSS** - Yep. I had to remove or change a couple of my structural elements in order to make sure that they interacted with the CSS correctly, but that's something that I knew I would have to do anyway (as I had done some styling in HTML for the last deliverable).
+- [x] **Responsive to window resizing using flexbox and/or grid display** - I didn't end up using any grids; all my resizability is from using the flexbox display.
+- [x] **Use of a imported font** - The font I found and am using is called "Special Elite". I imported it from Google.
+- [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I used element, class, ID, and pseudo selectors in my CSS stylings.
 
 ## 🚀 React part 1: Routing deliverable
 
