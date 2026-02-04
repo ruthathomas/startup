@@ -168,6 +168,61 @@ footer {
     font-weight: bold;
 }
 
+#bear {
+    margin: 0.5rem;
+    outline-style: double;
+    outline-width: 0.5rem;
+    outline-color: #262237;
+}
+
+/* all of the @ stuff */
+
+@media only screen and (max-width: 500px) {
+    nav > a {
+        display: none;
+    }
+    footer {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #bear { 
+        width: 50px;
+        height: 50px;
+        background-image: url("https://placebear.com/100/100");
+        background-repeat: no-repeat;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    #bear { 
+        width: 165px;
+        height: 165px;
+        background-image: url("https://placebear.com/200/200");
+        background-repeat: no-repeat;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    #bear { 
+        width: 360px;
+        height: 360px;
+        background-image: url("https://placebear.com/400/400");
+        background-repeat: no-repeat;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    #bear { 
+        width: 550px;
+        height: 550px;
+        background-image: url("https://placebear.com/600/600");
+        background-repeat: no-repeat;
+    }
+}
+
 /* #4C4661
    #39344B
    #262237 */
