@@ -82,6 +82,14 @@ button {
     padding: 0.75rem 1rem;
 }
 
+button:hover {
+    background-color: #0d0b17;
+}
+
+button:active {
+    background-color: #0d0b17;
+}
+
 input {
     border-radius: 15px;
     border-style: none;
@@ -147,6 +155,17 @@ footer {
 .test form > button {
     flex-grow: 1;
     margin: 0rem 0.5rem;
+}
+
+/* id stuff */
+
+#surprise {
+    background-color: #615A7C;
+}
+
+#surprise:hover {
+    background-color: #4a4366;
+    font-weight: bold;
 }
 
 /* #4C4661
