@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -43,4 +43,309 @@ body {
 
 .read-the-docs {
   color: #888;
+} */
+
+@import 'tailwindcss';
+/* not working >:(( */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+.special-elite-regular {
+  font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }
+
+* {
+    font-family: "Special Elite";
+}
+
+body {
+    background-color: #615A7C;
+    margin: 0rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* nav {
+    display: flex;
+    color: #d0cbe0;
+    background-color: #262237;
+    justify-content: space-between;
+}
+
+nav > * {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+nav > h2 {
+    flex: 1;
+}
+
+nav > a {
+    color: #d0cbe0;
+    text-decoration: none;
+    font-weight: bold;
+    align-self: center;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 0.25em;
+    border-color:#262237;
+}
+
+nav > a:hover {
+    background-color: #0d0b17;
+    border-color: #0d0b17;
+} */
+
+div {
+    background-color: #998FC9;
+    border-radius: 15px;
+    border-style: none;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 1rem;
+    color: #0d0b17;
+}
+
+a {
+    color: #d0cbe0;
+}
+
+button {
+    color: #d0cbe0;
+    background-color: #262237;
+    border-radius: 20px;
+    border-style: none;
+    padding: 0.75rem 1rem;
+}
+
+button:hover {
+    background-color: #0d0b17;
+}
+
+button:active {
+    background-color: #0d0b17;
+}
+
+input {
+    border-radius: 15px;
+    border-style: none;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+input:focus {
+    outline-color: #615A7C;
+}
+
+/* fixme something wacky is going on here */
+footer {
+    color: #d0cbe0;
+    background-color: #262237;
+    flex-shrink: 0;
+    bottom: 0;
+    flex: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 1rem;
+}
+
+/* class stuff */
+
+.game {
+    flex: 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.game > #above-game {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    color: #d0cbe0;
+    background-color: #615A7C;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.game > #game-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #d0cbe0;
+    /* overflow: hidden; */
+}
+
+.game input {
+    max-width: 75%;
+}
+
+.test {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.test div {
+    display: flex;
+    flex-direction: row;
+    margin: 0rem;
+    padding: 0.5rem;
+    justify-content: space-around;
+}
+
+.test form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0rem;
+    padding: 0.5rem;
+    justify-content: space-around;
+}
+
+.test div > button {
+    flex-grow: 1;
+    margin: 0rem 0.5rem;
+}
+
+.test form > button {
+    flex-grow: 1;
+    margin: 0rem 0.5rem;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: nowrap;
+    color: #d0cbe0;
+    background-color: #262237;
+    justify-content: space-between;
+}
+
+.nav > * {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+.nav > h2 {
+    flex: 1;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #d0cbe0;
+    text-decoration: none;
+    font-weight: bold;
+    align-self: center;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 0.25em;
+    border-color:#262237;
+}
+
+.nav-link.active {
+    background-color: #0d0b17;
+    border-color: #0d0b17;
+}
+
+.nav-link:hover {
+    color: #262237;
+    background-color: #998FC9;
+    border-color: #998FC9;
+}
+
+/* id stuff */
+
+#surprise {
+    background-color: #615A7C;
+}
+
+#surprise:hover {
+    background-color: #4a4366;
+    font-weight: bold;
+}
+
+#bear {
+    margin: 0.5rem;
+    outline-style: double;
+    outline-width: 0.5rem;
+    outline-color: #262237;
+}
+
+#game-box > * {
+    margin: 0.5rem 0.25rem;
+}
+
+/* all of the @ stuff */
+
+@media only screen and (max-width: 500px) {
+    .nav > a {
+        display: none;
+    }
+    footer {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #bear { 
+        width: 50px;
+        height: 50px;
+        background-image: url("https://placebear.com/100/100");
+        background-repeat: no-repeat;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    #bear { 
+        width: 165px;
+        height: 165px;
+        background-image: url("https://placebear.com/200/200");
+        background-repeat: no-repeat;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    #bear { 
+        width: 360px;
+        height: 360px;
+        background-image: url("https://placebear.com/400/400");
+        background-repeat: no-repeat;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    #bear { 
+        width: 550px;
+        height: 550px;
+        background-image: url("https://placebear.com/600/600");
+        background-repeat: no-repeat;
+    }
+}
+
+/* #4C4661
+   #39344B
+   #262237 */
+
+   /* #998FC9
+   #9893AD */

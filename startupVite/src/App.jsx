@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+// this is giving us the header and the footer, plus the <main> area, where we can route things
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <BrowserRouter>
+      <div className="index-body">
+        <header>
+          <nav className="nav">
+            <h2>bad libs</h2>
+              <NavLink className="nav-link" to="index">
+                Index
+              </NavLink>
+              <NavLink className="nav-link" to="home">
+                Home
+              </NavLink>
+              <NavLink className="nav-link" to="game">
+                Game
+              </NavLink>
+              <NavLink className="nav-link" to="animal">
+                Surprise
+              </NavLink>
+          </nav>
+        </header>
+        <Routes>
+            <Route path='/' element={<Login />} exact />
+            <Route path='/game' element={<Game />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/animal' element={<Animal />} />
+            <Route path='*' element={<NotFound />} />
+        </Routes>
       </div>
-      <h1>Ruth Thomas</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 10)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+function NotFound() {
+  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
+}
