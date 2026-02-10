@@ -134,4 +134,4 @@ element {
 - tbh I'm pretty confused about this stuff
 - jsx is like. javascript and html had a baby so you can have all the logic and the structure in the same place. it allows for components and also routing
 - run `npm run build` 'when you want to bundle your application so that you can deploy to a production environment'; executes build script, transpiles, and does all of the stuff to make it that it's deployment ready (puts it in a subdir called 'dist')
-- 
+- `./deployReact.sh -k <yourpemkey> -h <yourdomain> -s startup` remember that you can use this to deploy your stuff
