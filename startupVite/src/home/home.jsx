@@ -20,6 +20,9 @@ export function Home() {
                     <button>logout</button>
                 </form>
             </div>
+            <form style={{padding: 1 + 'rem', alignSelf: 'flex-start'}} method="get" action="animal.html">
+                <button id="surprise">surprise</button>
+            </form>
         </main>
     );
 }

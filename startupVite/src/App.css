@@ -138,6 +138,13 @@ footer {
     padding: 0rem 1rem;
 }
 
+/* ?? */
+
+::placeholder {
+    color: #0d0b17;
+    opacity: 0.6;
+}
+
 /* class stuff */
 
 .game {
@@ -146,6 +153,7 @@ footer {
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
+    margin: 0rem;
 }
 
 .game > #above-game {
@@ -176,7 +184,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    margin-top: 0;
+    /* margin-top: 0; */
 }
 
 .test div {
@@ -236,6 +244,13 @@ footer {
 }
 
 .nav-link.active {
+    color:#d0cbe0;
+    background-color: #0d0b17;
+    border-color: #0d0b17;
+}
+
+.nav-link.focus {
+    color:#d0cbe0;
     background-color: #0d0b17;
     border-color: #0d0b17;
 }
@@ -290,17 +305,17 @@ footer {
 
 @media only screen and (max-width: 600px) {
     #bear { 
-        width: 50px;
-        height: 50px;
-        background-image: url("https://placebear.com/100/100");
+        width: 75px;
+        height: 75px;
+        background-image: url("https://placebear.com/75/75");
         background-repeat: no-repeat;
     }
 }
 
 @media only screen and (min-width: 600px) {
     #bear { 
-        width: 165px;
-        height: 165px;
+        width: 200px;
+        height: 200px;
         background-image: url("https://placebear.com/200/200");
         background-repeat: no-repeat;
     }
