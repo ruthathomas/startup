@@ -3,7 +3,7 @@ import React from 'react';
 export function Home() {
     return (
         <main>
-            <div className="test" style="align-items: center; background-color: #615A7C; margin: 0;">
+            <div className="test" style={{alignItems: "center", margin: 0, background: "#615A7C"}}>
                 <p><b>welcome to</b></p>
                 <h1>Bad Libs,</h1>
                 <p><b>username</b></p>
@@ -23,3 +23,5 @@ export function Home() {
         </main>
     );
 }
+
+// "align-items: center; background-color: #615A7C; margin: 0;"

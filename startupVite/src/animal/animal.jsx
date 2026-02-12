@@ -2,12 +2,7 @@ import React from 'react';
 
 export function Animal() {
     return (
-        <div></div>
-    );
-}
-
-//issue here is that the style thing is freaking out
-{/* <main style="margin: 1rem;">
+        <main style={{margin: 1 + 'rem'}}>
             <h1>Bear Libs</h1>
             <div className="test">
                 <p>hey, username</p>
@@ -18,4 +13,8 @@ export function Animal() {
                     <button>home</button>
                 </form>
             </div>
-        </main> */}
+        </main>
+    );
+}
+
+//issue here is that the style thing is freaking out

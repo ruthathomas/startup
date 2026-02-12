@@ -41,11 +41,11 @@ export function Game() {
                 <span>friends.</span>
                 <p>The scripts for the game will be stored in and fetched from the database.</p>
             </div>
-            <div style="margin: 0rem 1rem;">
+            <div style={{margin: 0 + 'rem ' + 1 + 'rem'}}>
                 <p><em>User beans's turn!</em></p>
                 <p>User username joined.</p>
             </div>
-            <form style="padding: 1rem;" method="get" action="game.html">
+            <form style={{padding: 1 + 'rem'}} method="get" action="game.html">
                 <button>new game</button>
             </form>
         </main>
