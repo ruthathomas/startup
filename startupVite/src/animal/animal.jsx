@@ -2,9 +2,14 @@ import React from 'react';
 
 export function Animal() {
     return (
-        <main style="margin: 1rem;">
+        <div></div>
+    );
+}
+
+//issue here is that the style thing is freaking out
+{/* <main style="margin: 1rem;">
             <h1>Bear Libs</h1>
-            <div class="test">
+            <div className="test">
                 <p>hey, username</p>
                 <div id="bear"></div>
                 <p>here is a bear!</p>
@@ -13,6 +18,4 @@ export function Animal() {
                     <button>home</button>
                 </form>
             </div>
-        </main>
-    );
-}
+        </main> */}

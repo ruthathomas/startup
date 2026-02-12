@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Game() {
     return (
-        <main class="game">
+        <main className="game">
             <div id="above-game">
                 <span>Game Code: XXXXXX</span>
                 <form method="get" action="home.html">

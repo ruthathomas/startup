@@ -5,7 +5,7 @@ export function Login() {
         <main>
             <h1>Bad Libs</h1>
             <form method="get" action="home.html">
-                <div class="test">
+                <div className="test">
                     <input display="block" type="text" placeholder="username"></input>
                     <input display="block" type="password" placeholder="password"></input>
                     <div>
