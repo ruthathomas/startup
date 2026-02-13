@@ -1,13 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export function Game() {
+    const refresh = () => {
+        window.location.reload();
+    };
+
     return (
         <main className="game">
             <div id="above-game">
                 <span>Game Code: XXXXXX</span>
-                <form method="get" action="home.html">
+                <Link to="/home">
                     <button>quit</button>
-                </form>
+                </Link>
             </div>
             <div id="game-box">
                 <span>The</span>
@@ -45,8 +50,8 @@ export function Game() {
                 <p><em>User beans's turn!</em></p>
                 <p>User username joined.</p>
             </div>
-            <form style={{padding: 1 + 'rem'}} method="get" action="game.html">
-                <button>new game</button>
+            <form style={{padding: 1 + 'rem'}}>
+                <button onClick={refresh}>new game</button>
             </form>
         </main>
     );
