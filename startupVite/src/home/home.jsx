@@ -27,9 +27,9 @@ export function Home() {
                     </Link>
                 </div>
             </div>
-            <form style={{padding: 1 + 'rem', alignSelf: 'flex-start'}} method="get" action="animal.html">
+            <Link style={{padding: 1 + 'rem', alignSelf: 'flex-start'}} to="/animal">
                 <button id="surprise">surprise</button>
-            </form>
+            </Link>
         </main>
     );
 }
