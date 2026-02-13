@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export function Home() {
     return (
@@ -9,16 +10,22 @@ export function Home() {
                 <p><b>username</b></p>
             </div>
             <div className="test">
-                <form method="get" action="game.html">
-                    <button>create game</button>
-                </form>
-                <form method="get" action="game.html">
+                <div>
+                    <Link to="/game">
+                        <button style={{flexGrow: 1}}>create game</button>
+                    </Link>
+                </div>
+                <div>
                     <input type="text" placeholder="game code"></input>
-                    <button type="submit">join</button>
-                </form>
-                <form method="get" action="index.html">
-                    <button>logout</button>
-                </form>
+                    <Link to="/game">
+                        <button>join</button>
+                    </Link>
+                </div>
+                <div>
+                    <Link to="/">
+                        <button style={{flexGrow: 1}}>logout</button>
+                    </Link>
+                </div>
             </div>
             <form style={{padding: 1 + 'rem', alignSelf: 'flex-start'}} method="get" action="animal.html">
                 <button id="surprise">surprise</button>

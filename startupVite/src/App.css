@@ -190,28 +190,23 @@ footer {
 .test div {
     display: flex;
     flex-direction: row;
+    /* flex-wrap: wrap; */
     margin: 0rem;
     padding: 0.5rem;
     justify-content: space-around;
+    align-items: stretch;
 }
 
-.test form {
+.test div > a {
+    flex-grow: 1;
+    margin: 0rem 0.5rem;
+}
+
+.test a {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0rem;
-    padding: 0.5rem;
-    justify-content: space-around;
-}
-
-.test div > button {
     flex-grow: 1;
     margin: 0rem 0.5rem;
-}
-
-.test form > button {
-    flex-grow: 1;
-    margin: 0rem 0.5rem;
+    text-decoration: none;
 }
 
 .nav {
