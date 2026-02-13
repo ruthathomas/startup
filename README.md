@@ -128,8 +128,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Components** - I have a component for each of my pages (login, home, game, animal).
+- [x] **Router** - I route each of my pages via the `<BrowserRouter>` component in `App.jsx`!
 
 ## 🚀 React part 2: Reactivity deliverable
 
