@@ -137,3 +137,51 @@ element {
 - `./deployReact.sh -k <yourpemkey> -h <yourdomain> -s startup` remember that you can use this to deploy your stuff
 - for routing: make sure to check the debug console if it isn't routing properly!! the jsx won't display at all if there are any errors (may be import errors, may be syntax errors, etc)
 - I think I'm starting to understand this?? it's just taking some practice. But I've been getting better with debugging jsx, so I think that's good lol (this note is nothing but a pack on the back for myself haha)
+
+## JS
+- w/ `console.log` you can do strings, formatted strings (like `'yo %s', 'hehe'`), and strings with style??? you can do `console.log('%c JavaScript Demo', 'font-size:1.5em; color:green;');`
+- also with the console you can do timers?? `console.time('event_name')\rthing_to_do\rconsole.time('event_name')` will result in the time that it took to do `thing_to_do`
+- and also you can do `.count`, which counts
+- `let` makes a mutable object and `const` makes an immutable object
+- primitive types
+  - Null
+  - Undefined
+  - Boolean
+  - Number
+  - BigInt
+  - String
+  - Symbol
+- object types
+  - Object
+  - Function
+  - Date
+  - Array
+  - Map
+  - JSON
+- `===` is equality operator & `!==` is the inequality operator
+- strings can use concat and equality
+- `___ ? ___ : ___` ternary op (compact if/else)
+- you can use `for`, `for in` (property names), `for of` (property values), `while`, `do while`, and `switch`
+- `break` aborts a loop, `continue` advances it
+- strings can be inside '', "", or \`\` (backticks mean string literals that can have JS inside of them w/ a `${}` around it)
+- string functions: `length`, `indexOf()`, `split()`, `startsWith()`, `endsWith()`, `toLowerCase()`
+- function name(parameters) { body; return;} (these fellas can be used just like any other variable bc they're first class objects)
+- you won't get an error if you don't pass in all of the required parameters; instead, it'll just go "yeah so that's undefined" UNLESS you give it a default value (by the classic param = value syntax)
+- anonymoust function: const var = function (params) {} OR just that function bit passed in as a parameter to another function
+  - or, you can do the ((a) => console.log(\`it's ${a}\`), "value") thing (curly braces around these are optional)
+    - return keyword is optional if there's no curly braces and there's onlyl one expression (so the value of that expression is automatically returned)
+    - these inherit the 'this' pointer from the scope they were created in, which creates a closure ("closure allows a function to continue referencing its creation scope, even after it has passed out of that scope") -- basically, it lets you maintain the value of variables from the first time that function was ever referenced/was created
+- debounce functions execute a given function once w/in a given time window
+- array functions
+  - push
+  - pop
+  - slice
+  - sort
+  - values
+  - find
+  - forEach (run func on each array item)
+  - reduce (reduce each item array into a single item)
+  - map (map an array to new array)
+  - filter (remove items)
+  - every (every item match?)
+  - some (any items match?)
