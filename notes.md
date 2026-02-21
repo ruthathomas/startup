@@ -165,13 +165,16 @@ element {
 - `break` aborts a loop, `continue` advances it
 - strings can be inside '', "", or \`\` (backticks mean string literals that can have JS inside of them w/ a `${}` around it)
 - string functions: `length`, `indexOf()`, `split()`, `startsWith()`, `endsWith()`, `toLowerCase()`
+
+**Functions**
 - function name(parameters) { body; return;} (these fellas can be used just like any other variable bc they're first class objects)
 - you won't get an error if you don't pass in all of the required parameters; instead, it'll just go "yeah so that's undefined" UNLESS you give it a default value (by the classic param = value syntax)
-- anonymoust function: const var = function (params) {} OR just that function bit passed in as a parameter to another function
+- anonymous function: const var = function (params) {} OR just that function bit passed in as a parameter to another function
   - or, you can do the ((a) => console.log(\`it's ${a}\`), "value") thing (curly braces around these are optional)
     - return keyword is optional if there's no curly braces and there's onlyl one expression (so the value of that expression is automatically returned)
     - these inherit the 'this' pointer from the scope they were created in, which creates a closure ("closure allows a function to continue referencing its creation scope, even after it has passed out of that scope") -- basically, it lets you maintain the value of variables from the first time that function was ever referenced/was created
 - debounce functions execute a given function once w/in a given time window
+
 - array functions
   - push
   - pop
@@ -185,3 +188,44 @@ element {
   - filter (remove items)
   - every (every item match?)
   - some (any items match?)
+- Object properties can be accessed via . or []
+  - entries, keys, and values are some static functions you can use on Objects
+- "any function that returns an object is considered a constructor & can be invoked with the new operator"
+- class functions and properties can be privated with a hash as a prefix! e.g. `#property`
+- JSONs are always encoded w/ UTF-8
+- convert to and from JSON w/ `JSON.parse` and `JSON.stringify`
+- you can store stuff in your browser w/ the `localStorage` API (MUST be a string, number or boolean) --> use this for your basic login stuff before you make it actually work!
+  - `setItem(name, value)`
+  - `getItem(name)`
+  - `removeItem(name)`
+  - `clear()`
+
+**Promises**
+- async operations
+- may be:
+  - pending (going)
+  - fulfilled (done)
+  - rejected (failed)
+- resolve: func that sets the promise to `fulfilled`
+- reject: func that sets the promise to `rejected`
+- then, catch, and finally may be used esentially as try/catch
+
+**Async/Await**
+- like promises, but a little different
+- await "wraps the execution of a promise...will block until the promise state moves to fulfilled, or throws an exception if the state moves to rejected"
+- promise then/catch chain === await try/catch block
+- can only be called @ the top level of the JS or in a func. defined w/ async keyword (async makes it return a promise that resolves to the val previously returned by the func. (paraphrase))
+- await "wraps a call to the async function, blocks until the promise has resolved, and then returns the result of the promise" -- so it makes everything stop until the promise is taken care of, and then the promise result is returned instead of the promise object
+
+- destructuring is breaking down an item into multiple (e.g. `const a = [1,2]; const [b, c] = a;`, in which case `b = 1` and `c = 2`)
+  - you can map the vars to specific vals in an object by going `key: var`
+
+**React + JS**
+- `state` value is recorded in a table and is updated whenever an `updateState` method is called
+- and then to use you do `React.useState('state')`
+
+**Hooks**
+- `useState` (see above)
+- `useEffect` (does something every time the component is rendered (by default); can be changed to be called at different times)
+  - specifying an empty array makes the hook only call on the first render of the component
+- "Hooks must be called at the top scope of the function and cannot be called inside of a loop or conditional. This restriction ensures that hooks are always called in the same order when a component is rendered."
