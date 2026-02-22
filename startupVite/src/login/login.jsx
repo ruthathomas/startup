@@ -20,3 +20,8 @@ export function Login() {
         </main>
     );
 }
+
+// make it so log in logs you in (local storage)
+// make it so create creates one (local storage)
+// maybe make an extra page? not really sure
+// you're going to have to have a variable to check whether things are authenticated or not

@@ -37,7 +37,7 @@ export function Game() {
         for (let i = 0; i < currGame.script.length; i++) {
             var newElement;
             if(currGame.replace_indeces.includes(i)) {
-                //you should make the element an input element
+                // should I give them an id?? for access??
                 newElement = document.createElement("input");
                 newElement.type = "text";
                 newElement.placeholder = currGame.script.at(i);
@@ -45,8 +45,7 @@ export function Game() {
                 //you should make the element a span element
                 newElement = document.createElement("span");
                 newElement.textContent = currGame.script.at(i);
-                newElement.style = "background-color: black"
-                //classname it so that the background is black?? to redact it
+                newElement.style = "background-color: #212529"
             }
             gameContent.appendChild(newElement);
         }
@@ -80,34 +79,11 @@ export function Game() {
     );
 }
 
-
-    // <span>The</span>
-    // <input type="text" placeholder="plural noun"/>
-    // <span>here</span>
-    // <span>will</span>
-    // <span>be</span>
-    // <span>redacted</span>
-    // <span>for</span>
-    // <span>actual</span>
-    // <span>gameplay.</span>
-    // <input type="text" placeholder="pronoun"/>
-    // <span>will</span>
-    // <span>only</span>
-    // <span>be</span>
-    // <span>able</span>
-    // <span>to</span>
-    // <span>see</span>
-    // <span>the</span>
-    // <span>full</span>
-    // <input type="text" placeholder="noun"/>
-    // <span>after</span>
-    // <span>you</span>
-    // <span>have</span>
-    // <input type="text" placeholder="verb ending in -ed"/>
-    // <span>in</span>
-    // <span>the</span>
-    // <span>blanks</span>
-    // <span>with</span>
-    // <span>your</span>
-    // <span>friends.</span>
-    // <p>The scripts for the game will be stored in and fetched from the database.</p>
+// so new game button needs to change the game (clear old game and populate with new one)
+// when an input item is completed, it needs to be disabled (maybe give the input fields a class??)
+    // make some sort of react thing?? so when an input field is deselected and contains text, it gets disabled??
+// when all input items are completed, the text needs to be unredacted
+    // maybe make a class so that you can style the redacted text to have a rounded border??
+// after user inputs we need to do something to make it so that "other players" input a field??
+// after a player joins it needs to show that they joined (websocket imitation; check simon implementation)
+// is everything supposed to be disabled when not your turn?? because you will also have to code for that

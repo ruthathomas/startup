@@ -17,3 +17,6 @@ export function Animal() {
         </main>
     );
 }
+
+// I don't know if you need to do anything for this page? you're already accessing the API
+// only thing that I can think of that you may need to change is to use fetch instead of what you're doing??

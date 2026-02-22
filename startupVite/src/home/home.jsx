@@ -35,3 +35,7 @@ export function Home() {
 }
 
 // "align-items: center; background-color: #615A7C; margin: 0;"
+
+// make it so hitting join checks to see if the entered game code is valid (will need a local storage thing containing game codes)
+// make it so hitting create game generates a game code (which will be saved in local storage) and then opens up a new game
+// make it so logout logs you out (check the simon stuff)
