@@ -10,12 +10,12 @@ const sampleGames = [
     },
     {
         title: "A Story Story",
-        script: ["Have", "you", "ever", "had", "to", "write", "a", "story", "for", "your", "SCHOOL SUBJECT", "class?", "It", "can", "be", "pretty", "ADJECTIVE", ",", "especially", "if", "your", "professor", "wants", "it", "to", "be", "ADJECTIVE", ".", "I", "am", "personally", "bad", "at", "writing", "anything", "but", "GENRE", ".", "I", "hope", "ADJECTIVE", "PLURAL NOUN", "and", "ADJECTIVE", "PLURAL NOUN", "are", "acceptable", "subject", "matter", "for", "this", "course!"],
-        replace_indeces: [10, 16, 25, 37, 38, 40, 41]
+        script: ["Have", "you", "ever", "had", "to", "write", "a", "story", "for", "your", "school subject", "class?", "It", "can", "be", "pretty", "adjective", ",", "especially", "if", "your", "professor", "wants", "it", "to", "be", "adjective", ".", "I", "am", "personally", "bad", "at", "writing", "anything", "but", "genre", ".", "I", "hope", "adjective", "plural noun", "and", "adjective", "plural noun", "are", "acceptable", "subject", "matter", "for", "this", "course!"],
+        replace_indeces: [10, 16, 26, 36, 40, 41, 43, 44]
     },
     {
         title: "A Dessert Story",
-        script: ["The", "best", "kind", "of", "DESSERT", "is", "the", "kind", "made", "from", "real", "ANIMAL PRODUCT", ".", "Not", "only", "is", "the", "artificial", "kind", "the", "SUPERLATIVE", ",", "I've", "heard", "it's", "made", "of", "ANIMAL", "PLURAL BODY PART", ".", "Isn't", "that", "ADJECTIVE", "?", "The", "best", "way", "to", "get", "the", "real", "stuff", "is", "by", "going", "to", "a", "NUMBER", "SHAPE", "bakery.", "They", "only", "use", "the", "SUPERLATIVE", "PLURAL FOOD", "and", "PLURAL FOOD", ",", "which", "means", "that", "none", "of", "that", "nasty", "COLOR", "NUMBER", "!"],
+        script: ["The", "best", "kind", "of", "dessert", "is", "the", "kind", "made", "from", "real", "animal product", ".", "Not", "only", "is", "the", "artificial", "kind", "the", "superlative", ",", "I've", "heard", "it's", "made", "of", "animal", "plural body part", ".", "Isn't", "that", "adjective", "?", "The", "best", "way", "to", "get", "the", "real", "stuff", "is", "by", "going", "to", "a", "number", "shape", "bakery.", "They", "only", "use", "the", "superlative", "plural food", "and", "plural food", ",", "which", "means", "that", "none", "of", "that", "nasty", "color", "number", "!"],
         replace_indeces: [4, 11, 20, 27, 28, 32, 47, 48, 54, 55, 57, 66, 67]
     }
 ]
@@ -28,8 +28,13 @@ export function Game() {
     };
 
     function changeGame() {
-        const newGame = sampleGames[Math.floor(Math.random * sampleGames.length)];
+        // console.log(Math.random() * sampleGames.length)
+        const index = Math.floor(Math.random() * sampleGames.length);
+        console.log(index);
+        const newGame = sampleGames[index];
+        console.log(newGame);
         setCurrGame(newGame);
+        console.log(currGame);
     }
 
     function populateGame() {
@@ -51,12 +56,30 @@ export function Game() {
         }
     }
 
+    function clearGame() {
+        const gameContent = document.getElementById("game-box");
+        while(gameContent.firstChild) {
+            gameContent.removeChild(gameContent.lastChild)
+        }
+    }
+
+    function getNewGame() {
+        // // clear game
+        // clearGame();
+        // new game
+        changeGame();
+    }
+
     useEffect(() => {
         //get game to populate game-box
         changeGame();
-        //populate the game box
-        populateGame();
     }, []);
+
+    useEffect(() => {
+        //populate the game box
+        clearGame();
+        populateGame();
+    }, [currGame]);
 
     return (
         <main className="game">
