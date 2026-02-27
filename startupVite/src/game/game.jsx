@@ -44,12 +44,13 @@ const sampleAnswers = {
     color: "blue"
 }
 
-var mostRecentInput = undefined;
+var gameComplete = false;
 
 export function Game() {
     const [currGame, setCurrGame] = React.useState(sampleGames[0]);
     const [currElement, setCurrElement] = React.useState(document.body);
     const [checkIfDone, setCheckIfDone] = React.useState(false);
+    const [buttonVis, setButtonVis] = React.useState("hidden")
 
     // const refresh = () => {
     //     window.location.reload();
@@ -105,6 +106,18 @@ export function Game() {
         }
     }
 
+    function finishGame() {
+        setButtonVis("visible");
+        // make the redacted text visible
+        const element = document.getElementById("game-box");
+        const children = element.children;
+            for(var i = 0; i < children.length; i++) {
+                if(children[i].tagName === "SPAN") {
+                    children[i].style.backgroundColor = "#00000000";
+                }
+            }
+    }
+
     useEffect(() => {
         //get game to populate game-box
         changeGame();
@@ -116,40 +129,37 @@ export function Game() {
         populateGame();
     }, [currGame]);
 
-    // useEffect(() => {
-    //     //disable the input field once something has been entered in it
-    //     // document.activeElement;
-    //     if(currElement.tagName == "INPUT") {
-            
-    //         // console.log('yoohoo')
-    //         // console.log(`${currElement.outerHTML}`)
-    //         // currElement.value = "yolo"
-    //         // console.log(`${currElement.value}`)
-    //     }
-    // }, [currElement]);
-
     useEffect(() => {
         console.log('use effect entered')
-        var done = false;
+        var done = true;
         var setCheckFalse = false;
         if(checkIfDone) {
             setCheckFalse = true;
             console.log('checkifdone entered');
             const element = document.getElementById("game-box");
             const children = element.children;
-            // console.log(children);
             for(var i = 0; i < children.length; i++) {
-                // console.log(children[i].tagName)
                 if(children[i].tagName === "INPUT") {
-                    console.log('ee')
-                    //this is where we check to see if everything is disabled
+                    if(children[i].disabled === false) {
+                        done = false;
+                    }
                 }
+            }
+            if(done) {
+                console.log('finished');
+                gameComplete = true;
+                // setButtonVis("visible");
+                finishGame();
             }
         }
         if(setCheckFalse) {
             setCheckIfDone(false);
         }
     }, [checkIfDone]);
+
+    useEffect(() => {
+        document.getElementById("new-game-button").style.visibility = buttonVis;
+    }, [buttonVis]);
 
     return (
         <main className="game">
@@ -166,7 +176,7 @@ export function Game() {
                 <p>User username joined.</p>
             </div>
             <form style={{padding: 1 + 'rem'}}>
-                <button onClick={changeGame}>new game</button>
+                <button id="new-game-button" visibility={buttonVis} onClick={changeGame}>new game</button>
             </form>
             {/* <button onClick={changeElement}>cry</button> */}
         </main>
