@@ -126,7 +126,7 @@ input:focus {
 }
 
 input:disabled {
-    background-color: #d0cbe0;
+    background-color: #998FC9;
 }
 
 /* fixme something wacky is going on here */

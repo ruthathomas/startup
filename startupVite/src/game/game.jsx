@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 const sampleGames = [
     {
         title: "A Holiday Story",
-        script: ["I", "had", "the", "craziest", "holiday", "last", "month.", "We", "were", "setting", "up", "the", "animal", "decoration", "preposition", "the", "part of home", "when", "the", "element", "alarm", "went", "off!", "It", "turned", "out", "that", "family member", "had", "confused", "the", "plural decoration", "with", "the", "holiday dish", "and", "it", "was", "verb+ing", "all", "over", "the", "bottom", "of", "the", "oven!", "Luckily,", "our", "neighbors", "had", "a", "spare", "element", "extinguisher,", "so", "our", "oven", "was", "saved", "in", "no", "time.", "Dinner", "was", "pretty", "adjective", "and", "adjective", ",", "but", "at", "least", "we", "still", "had", "a", "house", "to", "eat", "it", "in!"],
-        replace_indeces: [4, 12, 14, 16, 19, 27, 31, 34, 38, 52, 65, 67]
+        script: ["I", "had", "the", "craziest", "holiday", "last", "month.", "We", "were", "setting", "up", "the", "animal", "decoration", "preposition", "the", "part of home", "when", "the", "element", "alarm", "went", "off!", "It", "turned", "out", "that", "family member", "had", "confused", "the", "plural decoration", "with", "the", "holiday dish", "and", "it", "was", "verb+ing", "all", "over", "the", "bottom", "of", "the", "oven!", "Luckily,", "our", "neighbors", "had", "a", "spare", "element", "extinguisher,", "so", "our", "oven", "was", "saved", "in", "no", "time.", "Dinner", "was", "pretty", "adjective", "and", "adjective", ",", "but", "at", "least", "we", "still", "had", "a", "house", "to", "eat", "it", "preposition", "!"],
+        replace_indeces: [4, 12, 14, 16, 19, 27, 31, 34, 38, 52, 65, 67, 80]
     },
     {
         title: "A Story Story",
-        script: ["Have", "you", "ever", "had", "to", "write", "a", "story", "for", "your", "school subject", "class?", "It", "can", "be", "pretty", "adjective", ",", "especially", "if", "your", "professor", "wants", "it", "to", "be", "adjective", ".", "I", "am", "personally", "bad", "at", "writing", "anything", "but", "genre", ".", "I", "hope", "adjective", "plural noun", "and", "adjective", "plural noun", "are", "acceptable", "subject", "matter", "for", "this", "course!"],
-        replace_indeces: [10, 16, 26, 36, 40, 41, 43, 44]
+        script: ["Have", "you", "ever", "had", "to", "write", "a", "story", "for", "your", "school subject", "class?", "It", "can", "be", "pretty", "adjective", ",", "especially", "if", "your", "professor", "wants", "it", "to", "be", "adjective", ".", "I", "am", "personally", "bad", "at", "writing", "anything", "but", "genre", ".", "I", "hope", "adjective", "plural noun", "and", "number", "adjective", "plural noun", "are", "acceptable", "subject", "matter", "for", "this", "course!"],
+        replace_indeces: [10, 16, 26, 36, 40, 41, 43, 44, 45]
     },
     {
         title: "A Dessert Story",
@@ -30,17 +30,17 @@ const sampleAnswers = {
     "plural decoration": "faberge eggs",
     "holiday dish": "eggnog",
     "verb+ing": "growing",
-    adjective: ["furry", "crunchy", "brown", "undercooked"],
+    adjective: "furry",
     "school subject": "physics",
     genre: "horror",
-    "plural noun": ["fitted sheets", "pathogens", "armchairs", "movies"],
+    "plural noun": "fitted sheets",
     dessert: "creme brule",
     "animal product": "eggs",
-    superlative: ["best", "most", "worst", "largest"],
+    superlative: "best",
     "plural body part": "toes",
-    number: 57,
+    number: "57",
     shape: "star",
-    "plural food": ["okra", "lamb chops", "bananas", "flour"],
+    "plural food": "okra",
     color: "blue"
 }
 
@@ -50,7 +50,8 @@ export function Game() {
     const [currGame, setCurrGame] = React.useState(sampleGames[0]);
     const [currElement, setCurrElement] = React.useState(document.body);
     const [checkIfDone, setCheckIfDone] = React.useState(false);
-    const [buttonVis, setButtonVis] = React.useState("hidden")
+    const [buttonVis, setButtonVis] = React.useState("hidden");
+    const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
 
     // const refresh = () => {
     //     window.location.reload();
@@ -69,6 +70,7 @@ export function Game() {
     }
 
     function populateGame() {
+        setIsPlayerTurn(true);
         const gameContent = document.getElementById("game-box");
         var numInputs = 0;
         for (let i = 0; i < currGame.script.length; i++) {
@@ -87,6 +89,7 @@ export function Game() {
                         event.preventDefault();
                         this.disabled = true;
                         setCheckIfDone(true);
+                        setIsPlayerTurn(false);
                     }
                 })
             } else {
@@ -118,19 +121,20 @@ export function Game() {
             }
     }
 
+    // get game to populate game-box
     useEffect(() => {
-        //get game to populate game-box
         changeGame();
     }, []);
 
+    // populate the game box
     useEffect(() => {
-        //populate the game box
         clearGame();
         populateGame();
     }, [currGame]);
 
+    // check if the game is over and perform according actions
     useEffect(() => {
-        console.log('use effect entered')
+        console.log('entered check if done');
         var done = true;
         var setCheckFalse = false;
         if(checkIfDone) {
@@ -148,7 +152,6 @@ export function Game() {
             if(done) {
                 console.log('finished');
                 gameComplete = true;
-                // setButtonVis("visible");
                 finishGame();
             }
         }
@@ -157,9 +160,45 @@ export function Game() {
         }
     }, [checkIfDone]);
 
+    // show new game button
     useEffect(() => {
         document.getElementById("new-game-button").style.visibility = buttonVis;
     }, [buttonVis]);
+
+    // change player thing FIXME can make cleaner
+    useEffect(() => {
+        console.log('entered change player thing')
+        const element = document.getElementById("game-box");
+        const children = element.children;
+        if(isPlayerTurn === true) {
+            // make it so regular player can play
+            for(var i = 0; i < children.length; i++) {
+                if(children[i].tagName === "INPUT") {
+                    if(!children[i].value) {
+                        children[i].disabled = false;
+                    }
+                }
+            }
+        } else {
+            for(var i = 0; i < children.length; i++) {
+                if(children[i].tagName === "INPUT") {
+                    children[i].disabled = true;
+                }
+            }
+            for(var i = 0; i < children.length; i++) {
+                if(children[i].tagName === "INPUT") {
+                    if(!children[i].value) {
+                        const word_type = children[i].placeholder;
+                        console.log(word_type)
+                        console.log(sampleAnswers)
+                        children[i].value = sampleAnswers[word_type];
+                        break;
+                    }
+                }
+            }
+            setIsPlayerTurn(true);
+        }
+    }, [isPlayerTurn]);
 
     return (
         <main className="game">
@@ -178,17 +217,13 @@ export function Game() {
             <form style={{padding: 1 + 'rem'}}>
                 <button id="new-game-button" visibility={buttonVis} onClick={changeGame}>new game</button>
             </form>
-            {/* <button onClick={changeElement}>cry</button> */}
         </main>
     );
 }
 
-// when all input items are completed, the text needs to be unredacted
-    // maybe make a class so that you can style the redacted text to have a rounded border??
-// after user inputs we need to do something to make it so that "other players" input a field??
+
+// maybe make a class so that you can style the redacted text to have a rounded border??
 // after a player joins it needs to show that they joined (websocket imitation; check simon implementation)
-// is everything supposed to be disabled when not your turn?? because you will also have to code for that
-// button for new game shouldn't be visible until game is completed
 
 
 // perhaps address the way it looks when it repopulates? looks funny
