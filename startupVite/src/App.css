@@ -125,6 +125,10 @@ input:focus {
     outline-color: #615A7C;
 }
 
+input:disabled {
+    background-color: #d0cbe0;
+}
+
 /* fixme something wacky is going on here */
 footer {
     color: #d0cbe0;

@@ -48,7 +48,8 @@ var mostRecentInput = undefined;
 
 export function Game() {
     const [currGame, setCurrGame] = React.useState(sampleGames[0]);
-    const [currElement, setCurrElement] = React.useState(document.body)
+    const [currElement, setCurrElement] = React.useState(document.body);
+    const [checkIfDone, setCheckIfDone] = React.useState(false);
 
     // const refresh = () => {
     //     window.location.reload();
@@ -64,22 +65,15 @@ export function Game() {
     function changeElement() {
         const element = document.activeElement;
         setCurrElement(element);
-        // console.log(`curr elem: ${currElement.outerHTML}`)
-        // const element = document.activeElement;
-        // console.log(element);
-        // console.log(`element tagName: ${element.tagName}`)
-        // if(element.tagName == "INPUT") {
-        //     mostRecentInput = element;
-        // }
-        // console.log(`recent elem: ${mostRecentInput.outerHTML}`);
-        // setCurrElement(element);
     }
 
     function populateGame() {
         const gameContent = document.getElementById("game-box");
+        var numInputs = 0;
         for (let i = 0; i < currGame.script.length; i++) {
             var newElement;
             if(currGame.replace_indeces.includes(i)) {
+                numInputs += 1;
                 // should I give them an id?? for access??
                 newElement = document.createElement("input");
                 newElement.type = "text";
@@ -87,6 +81,13 @@ export function Game() {
                 newElement.onfocus = function () {
                     changeElement();
                 };
+                newElement.addEventListener("keyup", function(event) {
+                    if(event.key === "Enter") {
+                        event.preventDefault();
+                        this.disabled = true;
+                        setCheckIfDone(true);
+                    }
+                })
             } else {
                 //you should make the element a span element
                 newElement = document.createElement("span");
@@ -115,16 +116,40 @@ export function Game() {
         populateGame();
     }, [currGame]);
 
+    // useEffect(() => {
+    //     //disable the input field once something has been entered in it
+    //     // document.activeElement;
+    //     if(currElement.tagName == "INPUT") {
+            
+    //         // console.log('yoohoo')
+    //         // console.log(`${currElement.outerHTML}`)
+    //         // currElement.value = "yolo"
+    //         // console.log(`${currElement.value}`)
+    //     }
+    // }, [currElement]);
+
     useEffect(() => {
-        //disable the input field once something has been entered in it
-        // document.activeElement;
-        if(currElement.tagName == "INPUT") {
-            console.log('yoohoo')
-            console.log(`${currElement.outerHTML}`)
-            currElement.value = "yolo"
-            console.log(`${currElement.value}`)
+        console.log('use effect entered')
+        var done = false;
+        var setCheckFalse = false;
+        if(checkIfDone) {
+            setCheckFalse = true;
+            console.log('checkifdone entered');
+            const element = document.getElementById("game-box");
+            const children = element.children;
+            // console.log(children);
+            for(var i = 0; i < children.length; i++) {
+                // console.log(children[i].tagName)
+                if(children[i].tagName === "INPUT") {
+                    console.log('ee')
+                    //this is where we check to see if everything is disabled
+                }
+            }
         }
-    }, [currElement]);
+        if(setCheckFalse) {
+            setCheckIfDone(false);
+        }
+    }, [checkIfDone]);
 
     return (
         <main className="game">
@@ -148,8 +173,6 @@ export function Game() {
     );
 }
 
-// when an input item is completed, it needs to be disabled (maybe give the input fields a class??)
-    // make some sort of react thing?? so when an input field is deselected and contains text, it gets disabled??
 // when all input items are completed, the text needs to be unredacted
     // maybe make a class so that you can style the redacted text to have a rounded border??
 // after user inputs we need to do something to make it so that "other players" input a field??
