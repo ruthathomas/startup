@@ -20,21 +20,59 @@ const sampleGames = [
     }
 ]
 
+const sampleAnswers = {
+    holiday: "St. Patrick's Day",
+    animal: "okapi",
+    preposition: "under",
+    "part of home": "living room",
+    element: "water",
+    "family member": "step-mother",
+    "plural decoration": "faberge eggs",
+    "holiday dish": "eggnog",
+    "verb+ing": "growing",
+    adjective: ["furry", "crunchy", "brown", "undercooked"],
+    "school subject": "physics",
+    genre: "horror",
+    "plural noun": ["fitted sheets", "pathogens", "armchairs", "movies"],
+    dessert: "creme brule",
+    "animal product": "eggs",
+    superlative: ["best", "most", "worst", "largest"],
+    "plural body part": "toes",
+    number: 57,
+    shape: "star",
+    "plural food": ["okra", "lamb chops", "bananas", "flour"],
+    color: "blue"
+}
+
+var mostRecentInput = undefined;
+
 export function Game() {
     const [currGame, setCurrGame] = React.useState(sampleGames[0]);
+    const [currElement, setCurrElement] = React.useState(document.body)
 
-    const refresh = () => {
-        window.location.reload();
-    };
+    // const refresh = () => {
+    //     window.location.reload();
+    // };
+    // should we reload on the get new game?? might fix problem of way it populates
 
     function changeGame() {
-        // console.log(Math.random() * sampleGames.length)
         const index = Math.floor(Math.random() * sampleGames.length);
-        console.log(index);
         const newGame = sampleGames[index];
-        console.log(newGame);
         setCurrGame(newGame);
-        console.log(currGame);
+    }
+
+    function changeElement() {
+        const element = document.activeElement;
+        setCurrElement(element);
+        // console.log(`curr elem: ${currElement.outerHTML}`)
+        // const element = document.activeElement;
+        // console.log(element);
+        // console.log(`element tagName: ${element.tagName}`)
+        // if(element.tagName == "INPUT") {
+        //     mostRecentInput = element;
+        // }
+        // console.log(`recent elem: ${mostRecentInput.outerHTML}`);
+        // setCurrElement(element);
     }
 
     function populateGame() {
@@ -46,6 +84,9 @@ export function Game() {
                 newElement = document.createElement("input");
                 newElement.type = "text";
                 newElement.placeholder = currGame.script.at(i);
+                newElement.onfocus = function () {
+                    changeElement();
+                };
             } else {
                 //you should make the element a span element
                 newElement = document.createElement("span");
@@ -63,13 +104,6 @@ export function Game() {
         }
     }
 
-    function getNewGame() {
-        // // clear game
-        // clearGame();
-        // new game
-        changeGame();
-    }
-
     useEffect(() => {
         //get game to populate game-box
         changeGame();
@@ -80,6 +114,17 @@ export function Game() {
         clearGame();
         populateGame();
     }, [currGame]);
+
+    useEffect(() => {
+        //disable the input field once something has been entered in it
+        // document.activeElement;
+        if(currElement.tagName == "INPUT") {
+            console.log('yoohoo')
+            console.log(`${currElement.outerHTML}`)
+            currElement.value = "yolo"
+            console.log(`${currElement.value}`)
+        }
+    }, [currElement]);
 
     return (
         <main className="game">
@@ -96,13 +141,13 @@ export function Game() {
                 <p>User username joined.</p>
             </div>
             <form style={{padding: 1 + 'rem'}}>
-                <button onClick={refresh}>new game</button>
+                <button onClick={changeGame}>new game</button>
             </form>
+            {/* <button onClick={changeElement}>cry</button> */}
         </main>
     );
 }
 
-// so new game button needs to change the game (clear old game and populate with new one)
 // when an input item is completed, it needs to be disabled (maybe give the input fields a class??)
     // make some sort of react thing?? so when an input field is deselected and contains text, it gets disabled??
 // when all input items are completed, the text needs to be unredacted
@@ -110,3 +155,7 @@ export function Game() {
 // after user inputs we need to do something to make it so that "other players" input a field??
 // after a player joins it needs to show that they joined (websocket imitation; check simon implementation)
 // is everything supposed to be disabled when not your turn?? because you will also have to code for that
+// button for new game shouldn't be visible until game is completed
+
+
+// perhaps address the way it looks when it repopulates? looks funny
