@@ -185,18 +185,20 @@ export function Game() {
                     children[i].disabled = true;
                 }
             }
-            for(var i = 0; i < children.length; i++) {
-                if(children[i].tagName === "INPUT") {
-                    if(!children[i].value) {
-                        const word_type = children[i].placeholder;
-                        console.log(word_type)
-                        console.log(sampleAnswers)
-                        children[i].value = sampleAnswers[word_type];
-                        break;
+            setTimeout(() => {
+                for(var i = 0; i < children.length; i++) {
+                    if(children[i].tagName === "INPUT") {
+                        if(!children[i].value) {
+                            const word_type = children[i].placeholder;
+                            console.log(word_type)
+                            console.log(sampleAnswers)
+                            children[i].value = sampleAnswers[word_type];
+                            break;
+                        }
                     }
                 }
-            }
-            setIsPlayerTurn(true);
+                setIsPlayerTurn(true);
+            }, 3000);
         }
     }, [isPlayerTurn]);
 
