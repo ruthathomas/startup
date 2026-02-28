@@ -97,6 +97,10 @@ a {
     color: #d0cbe0;
 }
 
+span {
+    border-radius: 5px;
+}
+
 button {
     color: #d0cbe0;
     background-color: #262237;

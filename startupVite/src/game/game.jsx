@@ -212,7 +212,7 @@ export function Game() {
             </div>
             <div id="game-box">
             </div>
-            <div style={{margin: 0 + 'rem ' + 1 + 'rem'}}>
+            <div id ="websocket-box" style={{margin: 0 + 'rem ' + 1 + 'rem'}}>
                 <p><em>User beans's turn!</em></p>
                 <p>User username joined.</p>
             </div>
@@ -224,8 +224,8 @@ export function Game() {
 }
 
 
-// maybe make a class so that you can style the redacted text to have a rounded border??
 // after a player joins it needs to show that they joined (websocket imitation; check simon implementation)
+// game code stuff
 
 
 // perhaps address the way it looks when it repopulates? looks funny

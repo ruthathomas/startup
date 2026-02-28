@@ -6,9 +6,14 @@ import { Login } from './login/login';
 import { Home } from './home/home';
 import { Game } from './game/game';
 import { Animal } from './animal/animal';
+import { AuthState } from './login/authState';
 
 
 export default function App() {
+  const [username, setUsername] = React.useState(localStorage.getItem('username') || '');
+  const currAuthState = username ? AuthState.Authenticated : AuthState.Unauthenticated;
+  const [authState, setAuthState] = React.useState(currAuthState);
+
   return (
     <BrowserRouter>
       <header>
@@ -21,7 +26,15 @@ export default function App() {
         </nav>
       </header>
       <Routes>
-        <Route path='/' element={<Login />} exact />
+        <Route path='/' element={
+          <Login 
+            authState={authState}
+            username={username}
+            onAuthChange={(username, authState) => {
+              setUsername(username);
+              setAuthState(authState);
+            }}
+          />} exact />
         <Route path='/home' element={<Home />} />
         <Route path='/game' element={<Game />} />
         <Route path='/animal' element={<Animal />} />

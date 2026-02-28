@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AuthState } from './authState.js';
 
-export function Login() {
+export function Login({ username, authState, onAuthChange }) {
     return (
         <main>
             <h1>Bad Libs</h1>
