@@ -117,6 +117,11 @@ button:active {
     background-color: #0d0b17;
 }
 
+button:disabled {
+    color: #615A7C;
+    background-color: #0d0b17;
+}
+
 input {
     background-color: white;
     border-radius: 15px;

@@ -8,7 +8,7 @@ export function Authenticated(props) {
 
     return (
         <div>
-            <p>{props.username}</p>
+            <p style={{textAlign: 'center'}}>hey, {props.username} :)</p>
             <button onClick={() => logout()}>logout</button>
         </div>
     )

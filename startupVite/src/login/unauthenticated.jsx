@@ -18,11 +18,11 @@ export function Unauthenticated(props) {
 
     return(
         <div className="test">
-            <input display="block" type="text" placeholder="username" value={userName} onChange={(e) => setUsername(e.target.value)}></input>
+            <input display="block" type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
             <input display="block" type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}></input>
             <div>
                     <button onClick={() => login()} disabled={!username || !password}>login</button>
-                    <button onClick={() => register()} disabled={!userName || !password}>register</button>
+                    <button onClick={() => register()} disabled={!username || !password}>register</button>
 
             </div>
         </div>

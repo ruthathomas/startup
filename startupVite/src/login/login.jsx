@@ -8,8 +8,16 @@ export function Login({ username, authState, onAuthChange }) {
     return (
         <main>
             <h1>Bad Libs</h1>
-            {authState === AuthState.Authenticated && (<Authenticated></Authenticated>)}
-            {authState === AuthState.Unauthenticated && (<Unauthenticated></Unauthenticated>)}
+            {authState === AuthState.Authenticated && (
+                <Authenticated
+                    username={username}
+                    onLogout={() => onAuthChange(username, AuthState.Unauthenticated)}
+                />)}
+            {authState === AuthState.Unauthenticated && (
+                <Unauthenticated
+                    username={username}
+                    onLogin={(loginUser) => onAuthChange(loginUser, AuthState.Authenticated)}
+                />)}
         </main>
     );
 }
