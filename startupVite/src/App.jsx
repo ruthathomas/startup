@@ -20,9 +20,15 @@ export default function App() {
         <nav className="nav">
           <h2>bad libs</h2>
           <NavLink className='nav-link' to=''>Login</NavLink>
-          <NavLink className='nav-link' to='home'>Home</NavLink>
-          <NavLink className='nav-link' to='game'>Game</NavLink>
-          <NavLink className='nav-link' to='animal'>Surprise</NavLink>
+          {authState === AuthState.Authenticated && (
+            <NavLink className='nav-link' to='home'>Home</NavLink>
+          )}
+          {authState === AuthState.Authenticated && (
+            <NavLink className='nav-link' to='game'>Game</NavLink>
+          )}
+          {authState === AuthState.Authenticated && (
+            <NavLink className='nav-link' to='animal'>Surprise</NavLink>
+          )}
         </nav>
       </header>
       <Routes>
@@ -35,7 +41,13 @@ export default function App() {
               setAuthState(authState);
             }}
           />} exact />
-        <Route path='/home' element={<Home />} />
+        <Route path='/home' element={<Home 
+          username={username}
+          onAuthChange={(username, authState) => {
+              setUsername(username);
+              setAuthState(authState);
+            }}
+          />} />
         <Route path='/game' element={<Game />} />
         <Route path='/animal' element={<Animal />} />
         <Route path='*' element={<NotFound />} />

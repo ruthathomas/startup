@@ -97,6 +97,10 @@ a {
     color: #d0cbe0;
 }
 
+p {
+    margin: 0;
+}
+
 span {
     border-radius: 5px;
 }

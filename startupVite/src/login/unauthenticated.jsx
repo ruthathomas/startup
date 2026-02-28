@@ -23,10 +23,7 @@ export function Unauthenticated(props) {
             <div>
                     <button onClick={() => login()} disabled={!username || !password}>login</button>
                     <button onClick={() => register()} disabled={!username || !password}>register</button>
-
             </div>
         </div>
     )
 }
-
-// fixme: you need to fix what's going on with the links

@@ -7,9 +7,12 @@ export function Authenticated(props) {
     }
 
     return (
-        <div>
-            <p style={{textAlign: 'center'}}>hey, {props.username} :)</p>
-            <button onClick={() => logout()}>logout</button>
+        <div className="test">
+            <p style={{textAlign: 'center', fontWeight: 'bold'}}>hey, {props.username} :)</p>
+            <div>
+                <button style={{marginRight: 0.5 + "rem"}} onClick={() => logout()}>home</button>
+                <button style={{marginLeft: 0.5 + "rem"}} onClick={() => logout()}>logout</button>
+            </div>
         </div>
     )
 }
