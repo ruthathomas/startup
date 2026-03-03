@@ -7,12 +7,14 @@ import { Home } from './home/home';
 import { Game } from './game/game';
 import { Animal } from './animal/animal';
 import { AuthState } from './login/authState';
+import { GameAuthState } from './game/gameAuthState';
 
 
 export default function App() {
   const [username, setUsername] = React.useState(localStorage.getItem('username') || '');
   const currAuthState = username ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currAuthState);
+  const [gameState, setGameState] = React.useState(GameAuthState.GameUnvalidated);
 
   return (
     <BrowserRouter>
@@ -47,8 +49,18 @@ export default function App() {
               setUsername(username);
               setAuthState(authState);
             }}
+          onGameAuthChange={(gameState) => {
+            setGameState(gameState);
+            console.log(gameState);
+          }}
           />} />
-        <Route path='/game' element={<Game />} />
+        <Route path='/game' element={<Game
+          gameState={gameState}
+          onGameAuthChange={(gameState) => {
+            setGameState(gameState);
+            console.log(gameState);
+          }}
+        />} />
         <Route path='/animal' element={<Animal />} />
         <Route path='*' element={<NotFound />} />
       </Routes>

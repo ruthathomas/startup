@@ -1,15 +1,39 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthState } from '../login/authState';
+import { GameAuthState } from '../game/gameAuthState';
 
-export function Home({ username, onAuthChange }) {
+export function Home({ username, onAuthChange, onGameAuthChange }) {
     const navigate = useNavigate();
+    const [gameCode, setGameCode] = React.useState();
 
     function homeLogout() {
         localStorage.removeItem('username');
         onAuthChange(username, AuthState.Unauthenticated);
         navigate('/');
     }
+
+    function generateCode() {
+        var newCode = ""
+        for(var i = 0; i < 6; i++) {
+            newCode += i;
+        }
+        console.log(newCode);
+        setGameCode(newCode);        
+    }
+
+    function createGame() {
+        generateCode();
+        navigate('/game');
+    }
+
+    useEffect(() => {
+        if(gameCode) {
+            localStorage.setItem('gameCode', gameCode);
+            onGameAuthChange(GameAuthState.Validated);
+        }
+    }, [gameCode])
 
     return (
         <main>
@@ -20,9 +44,7 @@ export function Home({ username, onAuthChange }) {
             </div>
             <div className="test">
                 <div>
-                    <Link to="/game">
-                        <button style={{flexGrow: 1}}>create game</button>
-                    </Link>
+                    <button style={{flexGrow: 1}} onClick={() => createGame()}>create game</button>
                 </div>
                 <div>
                     <input type="text" placeholder="game code"></input>
@@ -31,7 +53,7 @@ export function Home({ username, onAuthChange }) {
                     </Link>
                 </div>
                 <div>
-                    <button style={{flexGrow: 1}} onClick={homeLogout}>logout</button>
+                    <button style={{flexGrow: 1}} onClick={()=> homeLogout()}>logout</button>
                 </div>
             </div>
             <Link style={{padding: 1 + 'rem', alignSelf: 'flex-start'}} to="/animal">

@@ -24,8 +24,6 @@ export function Login({ username, authState, onAuthChange }) {
 
 // make it so log in logs you in (local storage)
 // make it so create creates one (local storage)
-// maybe make an extra page? not really sure
-// you're going to have to have a variable to check whether things are authenticated or not
 
 {/* <h1>Bad Libs</h1>
             <div className="test">
