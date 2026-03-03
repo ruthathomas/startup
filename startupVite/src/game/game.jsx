@@ -34,9 +34,4 @@ export function Game({ username, gameState, onGameAuthChange}) {
     );
 }
 
-
-// after a player joins it needs to show that they joined (websocket imitation; check simon implementation)
-// game code stuff
-
-
 // perhaps address the way it looks when it repopulates? looks funny

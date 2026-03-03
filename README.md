@@ -135,7 +135,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
     - Login page:
         - login/register buttons do not work unless both username and password fields are full
         - login/register buttons will authenticate user (I modeled some of this off of the way that Simon works; Simon didn't check passwords against local storage, so I didn't either)
@@ -147,8 +147,20 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
         - logout button removes the user from local storage and sends them back to the login page
         - surprise button sends the user to the surprise page
     - Game page:
-        - FIXME IN PROGRESS
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+        - game is chosen randomly from a list to simulate fetching from a database
+        - quit game removes current game code from local storage
+        - submitting input from `input` elements results in a changing of turns
+            - passing of play is simulated by a brief disabling of all input elements, followed by text appearing in the next open input element, followed by the reenabling of input elements
+        - game text is unredacted upon completion of all input elements
+        - new game button appears upon completion of all input elements
+            - pressing the button populates the page with a new game with the same game code
+        - box at bottom simulates websocket interaction
+            - notification when user joins
+            - notification when turn changes
+            - ngl it looks kind of funky right now with my animations, but the most important part is that it's working 👍
+    - Surprise page:
+        - this one gets a picture from the API I'm using and displays it :) the picture changes based on viewport size (this one I have kept pretty much the same for the whole time; I believe I'm using the API right?)
+- [x] **Hooks** - I used `useState` for any React reliant variables (authentication statuses, codes, current player, etc.); I used `useEffect` every time that I needed the page to rerender immediately following a change (it's used the most in gameplay, on the validated gameplay page)
 
 ## 🚀 Service deliverable
 
