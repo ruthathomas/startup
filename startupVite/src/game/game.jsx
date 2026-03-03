@@ -8,7 +8,7 @@ import { Validated } from './validated';
 export function Game({ gameState, onGameAuthChange}) {
 
     return (
-        <main style={{margin: 0, alignItems: 'stretch'}}>
+        <main style={{margin: 0}}>
             {/* <div className="game">
                 <div id="above-game">
                     <span>Game Code: XXXXXX</span>

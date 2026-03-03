@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { GameAuthState } from './gameAuthState';
 
 const sampleGames = [
     {
@@ -201,15 +202,15 @@ export function Validated(props) {
                         }
                     }
                     setIsPlayerTurn(true);
-                }, 30);
+                }, 3000);
             }
         }, [isPlayerTurn]);
 
     return(
-        <div className="game">
+        <div style={{alignItems: 'stretch'}} className="game">
             <div id="above-game">
                 <span>Game Code: {localStorage.getItem('gameCode')}</span>
-                <button onClick={() => logout()}>quit</button>
+                <button onClick={() => quit()}>quit</button>
             </div>
             <div id="game-box"></div>
             <div id ="websocket-box" style={{margin: 0 + 'rem ' + 1 + 'rem'}}>

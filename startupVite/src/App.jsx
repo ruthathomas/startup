@@ -16,6 +16,8 @@ export default function App() {
   const [authState, setAuthState] = React.useState(currAuthState);
   const [gameState, setGameState] = React.useState(GameAuthState.GameUnvalidated);
 
+  localStorage.setItem('perpetualGameCode', 'ABCDE');
+
   return (
     <BrowserRouter>
       <header>

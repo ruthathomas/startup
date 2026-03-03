@@ -23,6 +23,14 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
         setGameCode(newCode);        
     }
 
+    function submitGameCode() {
+        const enteredCode = document.getElementById('game-code').value;
+        if(enteredCode == localStorage.getItem('perpetualGameCode')) {
+            setGameCode(enteredCode);
+        }
+        navigate('/game');
+    }
+
     function createGame() {
         generateCode();
         navigate('/game');
@@ -47,10 +55,11 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
                     <button style={{flexGrow: 1}} onClick={() => createGame()}>create game</button>
                 </div>
                 <div>
-                    <input type="text" placeholder="game code"></input>
-                    <Link to="/game">
+                    <input id="game-code" type="text" placeholder="game code"></input>
+                    <button onClick={() => submitGameCode()}>join</button>
+                    {/* <Link to="/game">
                         <button>join</button>
-                    </Link>
+                    </Link> */}
                 </div>
                 <div>
                     <button style={{flexGrow: 1}} onClick={()=> homeLogout()}>logout</button>
@@ -64,6 +73,3 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
 }
 
 // "align-items: center; background-color: #615A7C; margin: 0;"
-
-// make it so hitting join checks to see if the entered game code is valid (will need a local storage thing containing game codes)
-// make it so hitting create game generates a game code (which will be saved in local storage) and then opens up a new game
