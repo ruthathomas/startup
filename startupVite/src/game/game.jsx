@@ -5,7 +5,7 @@ import { GameAuthState } from './gameAuthState';
 import { Unvalidated } from './unvalidated';
 import { Validated } from './validated';
 
-export function Game({ gameState, onGameAuthChange}) {
+export function Game({ username, gameState, onGameAuthChange}) {
 
     return (
         <main style={{margin: 0}}>
@@ -25,7 +25,7 @@ export function Game({ gameState, onGameAuthChange}) {
                 </form>
             </div> */}
             {gameState === GameAuthState.Validated && (
-                <Validated onGameAuthChange={onGameAuthChange}></Validated>
+                <Validated username={username} onGameAuthChange={onGameAuthChange}></Validated>
             )}
             {gameState === GameAuthState.Unvalidated && (
                 <Unvalidated></Unvalidated>

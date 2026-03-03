@@ -41,12 +41,6 @@
   color: #888;
 } */
 
-/* .body {
-  display: flex;
-  flex-direction: column;
-  min-width: 375px;
-} */
-
 @import 'tailwindcss';
 /* not working >:(( */
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
@@ -55,6 +49,7 @@
   font-family: "Special Elite", system-ui;
   font-weight: 400;
   font-style: normal;
+  color: #262237;
 }
 
 * {
@@ -274,8 +269,9 @@ footer {
     border-color: #998FC9;
 }
 
-.idkidk {
-    all: revert;
+.websocket-message {
+    animation-name: websocket-animation;
+    animation-duration: 1s;
 }
 
 /* id stuff */
@@ -354,6 +350,11 @@ footer {
         background-image: url("https://placebear.com/600/600");
         background-repeat: no-repeat;
     }
+}
+
+@keyframes websocket-animation {
+    from {color: #00000000; transform: translate(0, 50px);}
+    to {color: #262237; transform: translate(0, 0px);}
 }
 
 /* #4C4661

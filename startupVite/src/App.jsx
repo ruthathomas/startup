@@ -57,6 +57,7 @@ export default function App() {
           }}
           />} />
         <Route path='/game' element={<Game
+          username={username}
           gameState={gameState}
           onGameAuthChange={(gameState) => {
             setGameState(gameState);

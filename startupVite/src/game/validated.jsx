@@ -51,7 +51,11 @@ export function Validated(props) {
     const [checkIfDone, setCheckIfDone] = React.useState(false);
     const [buttonVis, setButtonVis] = React.useState("hidden");
     const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
+
     const navigate = useNavigate();
+    const username = props.username;
+    const fadeAnimation = { color: "#00000000" };
+    const fadeTiming = { duration: 1000, iterations: 1};
 
     function quit() {
         localStorage.removeItem('gameCode');
@@ -122,9 +126,35 @@ export function Validated(props) {
             }
     }
 
+    function sendMessage(message, isEmphasized) {
+        const websocketBox = document.getElementById("websocket-box");
+        const newMessage = document.createElement("p");
+        newMessage.className = "websocket-message";
+        newMessage.id = message;
+        if(isEmphasized) {
+            const emphElement = document.createElement("em");
+            emphElement.textContent = message;
+            newMessage.appendChild(emphElement);
+        } else {
+            newMessage.textContent = message;
+        }
+        websocketBox.appendChild(newMessage);
+        setTimeout(() => {
+            newMessage.animate(fadeAnimation, fadeTiming);
+        }, 4000);
+        setTimeout(() => {
+            websocketBox.removeChild(websocketBox.firstChild);
+        }, 5000)
+    }
+
     // get game to populate game-box
     useEffect(() => {
         changeGame();
+        sendMessage(`User ${username} joined!`, false);
+        setTimeout(() => {
+            sendMessage('User beans joined!', false);
+        }, 500)
+        // fixme; when you join, do: user joined! user joined! in the websocket box
     }, []);
 
     // populate the game box
@@ -175,6 +205,7 @@ export function Validated(props) {
             const element = document.getElementById("game-box");
             const children = element.children;
             if(isPlayerTurn === true) {
+                sendMessage(`User ${username}'s turn!`, true);
                 // make it so regular player can play
                 for(var i = 0; i < children.length; i++) {
                     if(children[i].tagName === "INPUT") {
@@ -184,6 +215,7 @@ export function Validated(props) {
                     }
                 }
             } else {
+                sendMessage("User beans's turn!", true);
                 for(var i = 0; i < children.length; i++) {
                     if(children[i].tagName === "INPUT") {
                         children[i].disabled = true;
@@ -212,10 +244,11 @@ export function Validated(props) {
                 <span>Game Code: {localStorage.getItem('gameCode')}</span>
                 <button onClick={() => quit()}>quit</button>
             </div>
+            <div style={{marginBottom: 0}}>To play, type an answer in one box and hit enter :)</div>
             <div id="game-box"></div>
             <div id ="websocket-box" style={{margin: 0 + 'rem ' + 1 + 'rem'}}>
-                <p><em>User beans's turn!</em></p>
-                <p>User username joined.</p>
+                {/* <p className='websocket-message'><em>User beans's turn!</em></p>
+                <p className='websocket-message'>User username joined.</p> */}
             </div>
             <div style={{all: "revert"}}>
                 <button id="new-game-button" style={{margin: 1 + 'rem'}} visibility={buttonVis} onClick={() => changeGame()}>new game</button>
