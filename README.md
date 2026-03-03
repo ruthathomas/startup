@@ -135,7 +135,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out**
     - Login page:
         - login/register buttons do not work unless both username and password fields are full
         - login/register buttons will authenticate user (I modeled some of this off of the way that Simon works; Simon didn't check passwords against local storage, so I didn't either)
