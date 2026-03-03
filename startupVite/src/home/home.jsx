@@ -65,9 +65,7 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
                     <button style={{flexGrow: 1}} onClick={()=> homeLogout()}>logout</button>
                 </div>
             </div>
-            <Link style={{padding: 1 + 'rem', alignSelf: 'flex-start'}} to="/animal">
-                <button id="surprise">surprise</button>
-            </Link>
+            <button style={{padding: 1 + 'rem', alignSelf: 'flex-start'}} id="surprise" onClick={() => navigate('/animal')}>surprise</button>
         </main>
     );
 }

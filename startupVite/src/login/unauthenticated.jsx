@@ -1,19 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function Unauthenticated(props) {
     const [username, setUsername] = React.useState(props.username);
     const [password, setPassword] = React.useState(props.password);
+    const navigate = useNavigate();
 
     function login() {
         localStorage.setItem('username', username);
         props.onLogin(username);
+        // navigate('/home');
     }
     
     function register() {
         localStorage.setItem('username', username);
         //fixme I don't want to do anything with passwords and Simon doesn't have that, so
         props.onLogin(username);
+        // navigate('/home');
     }
 
     return(

@@ -136,6 +136,18 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
+    - Login page:
+        - login/register buttons do not work unless both username and password fields are full
+        - login/register buttons will authenticate user (I modeled some of this off of the way that Simon works; Simon didn't check passwords against local storage, so I didn't either)
+        - top navbar only shows login page until user has been verified
+        - includes different pages for authenticated/unauthenticated
+    - Home page:
+        - create game button sets a game code to local storage, validates the game, and takes the user to the game page
+        - join button checks input against stored local code (to test, you may use the code 'ABCDE'), verifies the user if the check is true, and takes the user to the game page
+        - logout button removes the user from local storage and sends them back to the login page
+        - surprise button sends the user to the surprise page
+    - Game page:
+        - FIXME IN PROGRESS
 - [ ] **Hooks** - I did not complete this part of the deliverable.
 
 ## 🚀 Service deliverable
