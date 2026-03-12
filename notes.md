@@ -229,3 +229,17 @@ element {
 - `useEffect` (does something every time the component is rendered (by default); can be changed to be called at different times)
   - specifying an empty array makes the hook only call on the first render of the component
 - "Hooks must be called at the top scope of the function and cannot be called inside of a loop or conditional. This restriction ensures that hooks are always called in the same order when a component is rendered."
+
+## Service
+- DNS = Domain Name System --> place where you do a lookup to covert domain names to IP addresses
+- we will use TCP :)
+- you can just have your app be the service! instead of needing a separate program to do the services
+- web server: physical computing device
+- web service: provides a web application functionality
+- "web server allows for access to multiple services by referring to a different port number for each service" (port = house addr, server = street) --> we use a service gateway (reverse proxy) to map the req url to the correct service
+  - we use Caddy for this
+- microservice: a web service that provides only one functional purpose
+- fetch --> lets you make req to services
+- web service will be the backend
+- endpoint ~~ API
+- backend can also fetch to request from other web services
