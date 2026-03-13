@@ -314,3 +314,58 @@ element {
 - import a module w/ the format `const var = require('thing');`
 - export a module with the module.exports global var (`module.exports = {thingToExport,};`)
 - check out the 'ES Modules' section [here](https://byu.instructure.com/courses/32210/pages/modules)
+
+**Fetch**
+- fetch takes a URL and returns a promise; `then` takes a callback func that's called asynchronously when req'd URL content obtained (if returned content is `application/json`, you can use `json` func on resp to convert to JS object)
+```
+fetch('url')
+  .then((response) => response.json()) // take the response and turn it to json
+  .then((jsonResponse) => {
+    console.log(jsonResponse); // take the response json object and print it
+  })
+```
+- you can do options also!
+```
+fectch('url', {
+  // options
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'title',
+    body: 'body',
+  })
+  headers: {
+    // headers
+  }
+})
+// ... etc.
+```
+
+**Node Web Service**
+- make project
+- make index.js
+  ```
+  const http = require('http');
+  const server = http.createServer(function (req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(`<h1>Hello Node.js! [${req.method}] ${req.url}</h1>`);
+    res.end();
+  });
+
+  server.listen(8080, () => {
+    console.log(`Web service listening on port 8080`);
+  });
+  ```
+- but we gonna use Express --> will need `const express = require('express'); const app = express(); app.listen(8080);`
+- then define routes by `app.method('url', (req, res) => {res.method({path_param: value});});` that sort of thing
+- !note! Express "compares the routing function patterns in the order that they are added to the Express app object"
+- `req.params.param_name`
+- regex denoted by //
+- in your callback function, if you want any following middleware funcs to be called, you have to do `(req, res, next)`
+- middleware
+  - mediator: 'componentized pieces of functionality'
+  - middleware: 'loads the middleware components and determines their order of execution'
+  - so for what we're doing, Express is the mediator
+  - always called for every HTTP req unless a preceeding middleware func doesn't call next (`requestObj, responseObj, nextMiddlewareFunc`)
+  - order middleware are added controls order middleware are called
+- so. npm install express & also cookie-parser
+- might be good to make a sequence diagram
