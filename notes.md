@@ -241,7 +241,7 @@ element {
 - microservice: a web service that provides only one functional purpose
 - fetch --> lets you make req to services
 - web service will be the backend
-- endpoint ~~ API
+- endpoint ~~ API (Application Programming Interface)
 - backend can also fetch to request from other web services
 - URL = Uniform Resource Locator
   `<scheme>://<domain name>:<port>/<path>?<parameters>#<anchor>`
@@ -369,3 +369,16 @@ fectch('url', {
   - order middleware are added controls order middleware are called
 - so. npm install express & also cookie-parser
 - might be good to make a sequence diagram
+
+- Same Origin Policy (SOP): "only allows JavaScript to make requests to a domain if it is the same domain that the user is currently viewing"
+- Cross Origin Resource Sharing (CORS): "allows the client to specify the origin of a request and then let the server respond with what origins are allowed"
+- Each endpoint should provide a SINGULAR functional purpose
+  - everything a resource w/ HTTP (noun); act on it w/ a verb
+  - make sure to make your end points readable (human readable esp)
+  - make it so people only need to remember the top level endpoint and can discover the rest
+  - make them compatible (make it so you can add new functionality w/out breaking anything)
+  - keep it simple
+  - make sure everything is documented
+- RPC (Remote Procedure Calls) - "expose service endpoints as simple function calls"
+- REST (Representational State Transfer) - "attempts to take advantage of the foundational principles of HTTP"
+- GraphQL --> it's a query language
