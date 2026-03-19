@@ -12,6 +12,7 @@ import { GameAuthState } from './game/gameAuthState';
 
 export default function App() {
   const [username, setUsername] = React.useState(localStorage.getItem('username') || '');
+  // const [password, setPassword] = React.useState('');
   const currAuthState = username ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currAuthState);
   const [gameState, setGameState] = React.useState(GameAuthState.GameUnvalidated);

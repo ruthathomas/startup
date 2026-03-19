@@ -57,9 +57,6 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
                 <div>
                     <input id="game-code" type="text" placeholder="game code"></input>
                     <button onClick={() => submitGameCode()}>join</button>
-                    {/* <Link to="/game">
-                        <button>join</button>
-                    </Link> */}
                 </div>
                 <div>
                     <button style={{flexGrow: 1}} onClick={()=> homeLogout()}>logout</button>
