@@ -19,7 +19,7 @@ app.post('/api/auth', async (req, res) => {
         res.status(409).send({msg: 'Username already exists'})
     } else {
         const user = await createUser(req.body.username, req.body.password);
-        setAuthCookie(res, user);
+        createAuthCookie(res, user);
         res.send({username: user.username});
     }
 })
@@ -28,7 +28,7 @@ app.post('/api/auth', async (req, res) => {
 app.put('/api/auth', async (req, res) => {
     const user = await getUser('username', req.body.username);
     if(user && (await bcrypt.compare(req.body.password, user.password))) {
-        setAuthCookie(res, user);
+        createAuthCookie(res, user);
         res.send({username: user.username});
     } else {
         res.status(401).send({msg: 'Incorrect password :('})
@@ -92,4 +92,4 @@ async function createUser(username, password) {
 
 //error handling
 
-app.listen(3000);
+app.listen(5173);

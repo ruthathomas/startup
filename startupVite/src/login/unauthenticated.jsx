@@ -21,6 +21,7 @@ export function Unauthenticated(props) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({username, password})
         });
+        console.log(res);
         await res.json();
         if(res.ok) {
             props.onLogin(username);
