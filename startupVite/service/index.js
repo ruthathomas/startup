@@ -24,16 +24,25 @@ app.post('/api/auth', async (req, res) => {
     }
 })
 
-//login - put/post
+//login - put
 app.put('/api/auth', async (req, res) => {
-    //stubbing
-    res.send(req.body);
+    const user = await getUser('username', req.body.username);
+    if(user && (await bcrypt.compare(req.body.password, user.password))) {
+        setAuthCookie(res, user);
+        res.send({username: user.username});
+    } else {
+        res.status(401).send({msg: 'Incorrect password :('})
+    }
 })
 
 //logout - delete
 app.delete('/api/auth', async (req, res) => {
-    //stubbing
-    res.send(req.body);
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    if(user) {
+        deleteAuthCookie(res, user);
+    }
+    res.send({});
 })
 
 //create cookie
@@ -44,6 +53,12 @@ function createAuthCookie(res, user) {
         httpOnly: true,
         sameSite: 'strict'
     });
+}
+
+//delete cookie
+function deleteAuthCookie(res, user) {
+    delete user.token;
+    res.clearCookie('token');
 }
 
 //get user
@@ -77,32 +92,4 @@ async function createUser(username, password) {
 
 //error handling
 
-//cookie handling
-
 app.listen(3000);
-
-
-// const express = require('express');
-// const app = express();
-
-// // registration
-// app.post('/api/auth', async (req, res) => {
-//   res.send({ email: 'marta@id.com' });
-// });
-
-// // login
-// app.put('/api/auth', async (req, res) => {
-//   res.send({ email: 'marta@id.com' });
-// });
-
-// // logout
-// app.delete('/api/auth', async (req, res) => {
-//   res.send({});
-// });
-
-// // getMe
-// app.get('/api/user', async (req, res) => {
-//   res.send({ email: 'marta@id.com' });
-// });
-
-// app.listen(3000);
