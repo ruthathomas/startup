@@ -45,6 +45,9 @@ app.delete('/api/auth', async (req, res) => {
     res.send({});
 })
 
+//get user
+
+
 //create cookie
 function createAuthCookie(res, user) {
     user.token = uuid.v4();
@@ -92,4 +95,4 @@ async function createUser(username, password) {
 
 //error handling
 
-app.listen(5173);
+app.listen(4000);
