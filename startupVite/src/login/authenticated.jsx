@@ -20,12 +20,6 @@ export function Authenticated(props) {
         props.onLogout();
     }
 
-    // logout function
-    // function logout() {
-    //     localStorage.removeItem('username');
-    //     props.onLogout();
-    // }
-
     return (
         <div className="test">
             <p style={{textAlign: 'center', fontWeight: 'bold'}}>hey, {props.username} :)</p>

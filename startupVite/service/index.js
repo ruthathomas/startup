@@ -45,8 +45,20 @@ app.delete('/api/auth', async (req, res) => {
     res.send({});
 })
 
-//get user
+//start game
+app.post('/api/game', async (req, res) => {
+    //fixme
+})
 
+//join game
+app.put('/api/game', async (req, res) => {
+    //fixme
+})
+
+//leave game
+app.delete('/api/game', async (req, res) => {
+    //fixme
+})
 
 //create cookie
 function createAuthCookie(res, user) {
@@ -86,10 +98,26 @@ async function createUser(username, password) {
 //verify user
 
 //fetch game
-
-//update game
+function getGame(field, value) {
+    if (value) {
+        return games.find((game) => game[field] === value);
+    }
+    return null;
+}
 
 //create game
+async function createGame() {
+    // create a game number
+    // get a random game
+    const game = {
+        code: 'fixme',
+        text: 'fixme'
+    }
+    games.push(game);
+    return game;
+}
+
+//update game
 
 //verify game code
 
