@@ -9,21 +9,6 @@ export function Game({ username, gameState, onGameAuthChange}) {
 
     return (
         <main style={{margin: 0}}>
-            {/* <div className="game">
-                <div id="above-game">
-                    <span>Game Code: XXXXXX</span>
-                    <button onClick={() => quit()}>quit</button>
-                </div>
-                <div id="game-box">
-                </div>
-                <div id ="websocket-box" style={{margin: 0 + 'rem ' + 1 + 'rem'}}>
-                    <p><em>User beans's turn!</em></p>
-                    <p>User username joined.</p>
-                </div>
-                <form style={{padding: 1 + 'rem'}}>
-                    <button id="new-game-button" visibility={buttonVis} onClick={changeGame}>new game</button>
-                </form>
-            </div> */}
             {gameState === GameAuthState.Validated && (
                 <Validated username={username} onGameAuthChange={onGameAuthChange}></Validated>
             )}

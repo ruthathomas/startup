@@ -8,39 +8,75 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
     const navigate = useNavigate();
     const [gameCode, setGameCode] = React.useState();
 
-    function homeLogout() {
-        localStorage.removeItem('username');
+    function handleJoinGame() {
+        const enteredCode = document.getElementById('game-code').value;
+        //fixme this is async and so it may go to setupGame before this has been taken care of
+        setGameCode(enteredCode);
+        setupGame('PUT');
+    }
+
+    function handleCreateGame() {
+        setupGame('POST');
+    }
+
+    function handleLogout() {
+        fetch('api/auth', {
+            method: 'DELETE',
+        });
         onAuthChange(username, AuthState.Unauthenticated);
         navigate('/');
     }
 
-    function generateCode() {
-        var newCode = ""
-        for(var i = 0; i < 6; i++) {
-            newCode += i;
+    async function setupGame(method) {
+        const res = await fetch('/api/game', {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({code: gameCode})
+        });
+        console.log(res);
+        await res.json();
+        if(res.ok) {
+            //then do the things that you're supposed to do (change the game auth state, etc.)
+            onGameAuthChange(GameAuthState.Validated);
+            navigate('/game');
+        } else {
+            alert('game authentication failed :(');
         }
-        console.log(newCode);
-        setGameCode(newCode);        
     }
+    // function homeLogout() {
+    //     localStorage.removeItem('username');
+        
+    // }
 
-    function submitGameCode() {
-        const enteredCode = document.getElementById('game-code').value;
-        if(enteredCode == localStorage.getItem('perpetualGameCode')) {
-            setGameCode(enteredCode);
-        }
-        navigate('/game');
-    }
 
-    function createGame() {
-        generateCode();
-        navigate('/game');
-    }
+    // function generateCode() {
+    //     var newCode = ""
+    //     for(var i = 0; i < 6; i++) {
+    //         newCode += i;
+    //     }
+    //     console.log(newCode);
+    //     setGameCode(newCode);        
+    // }
+
+    // function submitGameCode() {
+    //     const enteredCode = document.getElementById('game-code').value;
+    //     if(enteredCode == localStorage.getItem('perpetualGameCode')) {
+    //         setGameCode(enteredCode);
+    //     }
+    //     navigate('/game');
+    // }
+
+    // function createGame() {
+    //     generateCode();
+    //     navigate('/game');
+    // }
 
     useEffect(() => {
-        if(gameCode) {
-            localStorage.setItem('gameCode', gameCode);
-            onGameAuthChange(GameAuthState.Validated);
-        }
+        // if(gameCode) {
+        //     localStorage.setItem('gameCode', gameCode);
+        //     onGameAuthChange(GameAuthState.Validated);
+        // }
+        // maybe keeping this here will force it to update?
     }, [gameCode])
 
     return (
@@ -52,14 +88,14 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
             </div>
             <div className="test">
                 <div>
-                    <button style={{flexGrow: 1}} onClick={() => createGame()}>create game</button>
+                    <button style={{flexGrow: 1}} onClick={() => handleCreateGame()}>create game</button>
                 </div>
                 <div>
                     <input id="game-code" type="text" placeholder="game code"></input>
-                    <button onClick={() => submitGameCode()}>join</button>
+                    <button onClick={() => handleJoinGame()}>join</button>
                 </div>
                 <div>
-                    <button style={{flexGrow: 1}} onClick={()=> homeLogout()}>logout</button>
+                    <button style={{flexGrow: 1}} onClick={()=> handleLogout()}>logout</button>
                 </div>
             </div>
             <button style={{padding: 1 + 'rem', alignSelf: 'flex-start'}} id="surprise" onClick={() => navigate('/animal')}>surprise</button>

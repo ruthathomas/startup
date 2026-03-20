@@ -47,17 +47,34 @@ app.delete('/api/auth', async (req, res) => {
 
 //start game
 app.post('/api/game', async (req, res) => {
-    //fixme
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    if(user) {
+        let game = await createGame();
+        // do some sort of authentication for game? prob. unnecessary
+        res.send({code: game.code, game: game.game});
+    } else {
+        res.status(401).send({msg: 'Unauthorized :('});
+    }
 })
 
 //join game
 app.put('/api/game', async (req, res) => {
-    //fixme
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    const game = await getGame('code', req.body.code);
+    if(user) {
+        res.send({game: game.game})
+    } else {
+        res.status(401).send({msg: 'Unauthorized :('});
+    }
 })
 
 //leave game
 app.delete('/api/game', async (req, res) => {
-    //fixme
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    //fixme FIXME
 })
 
 //create cookie
