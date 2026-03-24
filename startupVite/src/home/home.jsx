@@ -8,15 +8,14 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
     const navigate = useNavigate();
     const [gameCode, setGameCode] = React.useState('');
 
-    function handleJoinGame() {
+    async function handleJoinGame() {
         const enteredCode = document.getElementById('game-code').value;
         //fixme this is async and so it may go to setupGame before this has been taken care of
         setGameCode(enteredCode);
-        setupGame('PUT');
     }
 
     function handleCreateGame() {
-        setupGame('POST');
+        createGame();
     }
 
     // we are having some internal server errors here? check it
@@ -24,13 +23,14 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
         fetch('/api/auth', {
             method: 'DELETE',
         });
+        //fixme do we need to wait here? to make sure everything is working properly?
         onAuthChange(username, AuthState.Unauthenticated);
         navigate('/');
     }
 
-    async function setupGame(method) {
+    async function createGame() {
         const res = await fetch('/api/game', {
-            method: method,
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({code: gameCode})
         });
@@ -38,49 +38,63 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
         const resData = await res.json();
         console.log(`data: ${JSON.stringify(resData)}`);
         if(res.ok) {
-            //then do the things that you're supposed to do (change the game auth state, etc.)
-            console.log(`game code: ${resData.code}`)
-            setGameCode(resData.code);
+            // setGameCode(resData.code);
             onGameAuthChange(GameAuthState.Validated);
-            navigate('/game');
+            navigate('/game', { state: {code: resData.code, game: resData.game} });
         } else {
-            alert('game authentication failed :(');
+            alert('game creation failed :(');
         }
     }
-    // function homeLogout() {
-    //     localStorage.removeItem('username');
-        
-    // }
 
+    async function getGame() {
+        //should be get, not put FIXME --> get can't have body
+        const res = await fetch('/api/game', {
+            method: 'GET',
+            // just make a header for code instead of the body
+            headers: {
+                'Content-Type': 'application/json',
+                'code': gameCode
+             }
+            // body: JSON.stringify({code: gameCode})
+        });
+        const resData = await res.json();
+        console.log(`data: ${JSON.stringify(resData)}`);
+        if(res.ok) {
+            onGameAuthChange(GameAuthState.Validated);
+            navigate('/game', { state: {code: gameCode, game: resData.game} });
+        } else {
+            alert('game code invalid :(');
+        }
+    }
 
-    // function generateCode() {
-    //     var newCode = ""
-    //     for(var i = 0; i < 6; i++) {
-    //         newCode += i;
+    // async function setupGame(method) {
+    //     const res = await fetch('/api/game', {
+    //         method: method,
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({code: gameCode})
+    //     });
+    //     // the response is coming back with an empty body :'(
+    //     const resData = await res.json();
+    //     console.log(`data: ${JSON.stringify(resData)}`);
+    //     if(res.ok) {
+    //         //then do the things that you're supposed to do (change the game auth state, etc.)
+    //         console.log(`game code: ${resData.code}`)
+    //         setGameCode(resData.code);
+    //         console.log(`changed gamecode to: ${gameCode}`)
+    //         onGameAuthChange(GameAuthState.Validated);
+    //         // { state: {thing: thing} }
+    //         navigate('/game', { state: {code: resData.code, game: resData.game} });
+    //     } else {
+    //         alert('game authentication failed :(');
     //     }
-    //     console.log(newCode);
-    //     setGameCode(newCode);        
-    // }
-
-    // function submitGameCode() {
-    //     const enteredCode = document.getElementById('game-code').value;
-    //     if(enteredCode == localStorage.getItem('perpetualGameCode')) {
-    //         setGameCode(enteredCode);
-    //     }
-    //     navigate('/game');
-    // }
-
-    // function createGame() {
-    //     generateCode();
-    //     navigate('/game');
     // }
 
     useEffect(() => {
-        // if(gameCode) {
-        //     localStorage.setItem('gameCode', gameCode);
-        //     onGameAuthChange(GameAuthState.Validated);
-        // }
-        console.log(`game code: ${gameCode}`);
+        if(gameCode) {
+            getGame();
+        } else {
+            console.log(':(');
+        }
     }, [gameCode])
 
     return (

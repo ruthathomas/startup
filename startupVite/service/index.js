@@ -74,12 +74,13 @@ app.post('/api/game', async (req, res) => {
 })
 
 //join game
-app.put('/api/game', async (req, res) => {
+app.get('/api/game', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
-    const game = await getGame('code', req.body.code);
+    const code = req.headers.code;
+    const game = await getGame('code', code);
     if(user && game) {
-        res.send({game: game.text})
+        res.send({code: code, game: game.text})
     } else {
         res.status(401).send({msg: 'Unauthorized :('});
     }

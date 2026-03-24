@@ -46,7 +46,7 @@ const sampleAnswers = {
 var gameComplete = false;
 
 export function Validated(props) {
-    const [currGame, setCurrGame] = React.useState(sampleGames[0]);
+    const [currGame, setCurrGame] = React.useState(props.game);
     const [currElement, setCurrElement] = React.useState(document.body);
     const [checkIfDone, setCheckIfDone] = React.useState(false);
     const [buttonVis, setButtonVis] = React.useState("hidden");
@@ -149,7 +149,9 @@ export function Validated(props) {
 
     // get game to populate game-box
     useEffect(() => {
-        changeGame();
+        // changeGame();
+        console.log(props.code);
+        console.log(props.game);
         sendMessage(`User ${username} joined!`, false);
         setTimeout(() => {
             sendMessage('User beans joined!', false);
@@ -241,7 +243,7 @@ export function Validated(props) {
     return(
         <div style={{alignItems: 'stretch'}} className="game">
             <div id="above-game">
-                <span>Game Code: {localStorage.getItem('gameCode')}</span>
+                <span>Game Code: {props.code}</span>
                 <button onClick={() => quit()}>quit</button>
             </div>
             <div style={{marginBottom: 0}}>To play, type an answer in one box and hit enter :)</div>
