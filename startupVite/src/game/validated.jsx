@@ -159,21 +159,21 @@ export function Validated(props) {
 
     // populate the game box
     useEffect(() => {
-        console.log('before clear game')
+        // console.log('before clear game')
         clearGame();
-        console.log('before populateGame')
+        // console.log('before populateGame')
         populateGame();
         setButtonVis('hidden');
     }, [currGame]);
 
     // check if the game is over and perform according actions
     useEffect(() => {
-        console.log('entered check if done');
+        // console.log('entered check if done');
         var done = true;
         var setCheckFalse = false;
         if(checkIfDone) {
             setCheckFalse = true;
-            console.log('checkifdone entered');
+            // console.log('checkifdone entered');
             const element = document.getElementById("game-box");
             const children = element.children;
             for(var i = 0; i < children.length; i++) {
@@ -184,7 +184,7 @@ export function Validated(props) {
                 }
             }
             if(done) {
-                console.log('finished');
+                // console.log('finished');
                 gameComplete = true;
                 finishGame();
             }
@@ -201,7 +201,7 @@ export function Validated(props) {
 
     // change player thing FIXME can make cleaner
         useEffect(() => {
-            console.log('entered change player thing')
+            // console.log('entered change player thing')
             const element = document.getElementById("game-box");
             const children = element.children;
             if(isPlayerTurn === true) {
@@ -226,8 +226,8 @@ export function Validated(props) {
                         if(children[i].tagName === "INPUT") {
                             if(!children[i].value) {
                                 const word_type = children[i].placeholder;
-                                console.log(word_type)
-                                console.log(sampleAnswers)
+                                // console.log(word_type)
+                                // console.log(sampleAnswers)
                                 children[i].value = sampleAnswers[word_type];
                                 break;
                             }

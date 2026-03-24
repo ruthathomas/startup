@@ -6,7 +6,7 @@ import { GameAuthState } from '../game/gameAuthState';
 
 export function Home({ username, onAuthChange, onGameAuthChange }) {
     const navigate = useNavigate();
-    const [gameCode, setGameCode] = React.useState();
+    const [gameCode, setGameCode] = React.useState('');
 
     function handleJoinGame() {
         const enteredCode = document.getElementById('game-code').value;
@@ -19,8 +19,9 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
         setupGame('POST');
     }
 
+    // we are having some internal server errors here? check it
     function handleLogout() {
-        fetch('api/auth', {
+        fetch('/api/auth', {
             method: 'DELETE',
         });
         onAuthChange(username, AuthState.Unauthenticated);
@@ -33,10 +34,13 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({code: gameCode})
         });
-        console.log(res);
-        await res.json();
+        // the response is coming back with an empty body :'(
+        const resData = await res.json();
+        console.log(`data: ${JSON.stringify(resData)}`);
         if(res.ok) {
             //then do the things that you're supposed to do (change the game auth state, etc.)
+            console.log(`game code: ${resData.code}`)
+            setGameCode(resData.code);
             onGameAuthChange(GameAuthState.Validated);
             navigate('/game');
         } else {
@@ -76,7 +80,7 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
         //     localStorage.setItem('gameCode', gameCode);
         //     onGameAuthChange(GameAuthState.Validated);
         // }
-        // maybe keeping this here will force it to update?
+        console.log(`game code: ${gameCode}`);
     }, [gameCode])
 
     return (

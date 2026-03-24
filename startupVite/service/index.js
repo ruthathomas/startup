@@ -5,7 +5,22 @@ const uuid = require('uuid');
 const app = express();
 
 const authCookieName = 'token';
-const baseGames = []; //fixme fill up with the games
+const baseGames = [{
+        title: "A Holiday Story",
+        script: ["I", "had", "the", "craziest", "holiday", "last", "month.", "We", "were", "setting", "up", "the", "animal", "decoration", "preposition", "the", "part of home", "when", "the", "element", "alarm", "went", "off!", "It", "turned", "out", "that", "family member", "had", "confused", "the", "plural decoration", "with", "the", "holiday dish", "and", "it", "was", "verb+ing", "all", "over", "the", "bottom", "of", "the", "oven!", "Luckily,", "our", "neighbors", "had", "a", "spare", "element", "extinguisher,", "so", "our", "oven", "was", "saved", "in", "no", "time.", "Dinner", "was", "pretty", "adjective", "and", "adjective", ",", "but", "at", "least", "we", "still", "had", "a", "house", "to", "eat", "it", "preposition", "!"],
+        replace_indeces: [4, 12, 14, 16, 19, 27, 31, 34, 38, 52, 65, 67, 80]
+    },
+    {
+        title: "A Story Story",
+        script: ["Have", "you", "ever", "had", "to", "write", "a", "story", "for", "your", "school subject", "class?", "It", "can", "be", "pretty", "adjective", ",", "especially", "if", "your", "professor", "wants", "it", "to", "be", "adjective", ".", "I", "am", "personally", "bad", "at", "writing", "anything", "but", "genre", ".", "I", "hope", "adjective", "plural noun", "and", "number", "adjective", "plural noun", "are", "acceptable", "subject", "matter", "for", "this", "course!"],
+        replace_indeces: [10, 16, 26, 36, 40, 41, 43, 44, 45]
+    },
+    {
+        title: "A Dessert Story",
+        script: ["The", "best", "kind", "of", "dessert", "is", "the", "kind", "made", "from", "real", "animal product", ".", "Not", "only", "is", "the", "artificial", "kind", "the", "superlative", ",", "I've", "heard", "it's", "made", "of", "animal", "plural body part", ".", "Isn't", "that", "adjective", "?", "The", "best", "way", "to", "get", "the", "real", "stuff", "is", "by", "going", "to", "a", "number", "shape", "bakery.", "They", "only", "use", "the", "superlative", "plural food", "and", "plural food", ",", "which", "means", "that", "none", "of", "that", "nasty", "color", "number", "!"],
+        replace_indeces: [4, 11, 20, 27, 28, 32, 47, 48, 54, 55, 57, 66, 67]
+    }];
+const possChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
 
 let users = [];
 let games = [];
@@ -52,9 +67,9 @@ app.post('/api/game', async (req, res) => {
     if(user) {
         let game = await createGame();
         // do some sort of authentication for game? prob. unnecessary
-        res.send({code: game.code, game: game.game});
+        return res.send({code: game.code, game: game.text});
     } else {
-        res.status(401).send({msg: 'Unauthorized :('});
+        return res.status(401).send({msg: 'Unauthorized :('});
     }
 })
 
@@ -63,8 +78,8 @@ app.put('/api/game', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
     const game = await getGame('code', req.body.code);
-    if(user) {
-        res.send({game: game.game})
+    if(user && game) {
+        res.send({game: game.text})
     } else {
         res.status(401).send({msg: 'Unauthorized :('});
     }
@@ -125,13 +140,32 @@ function getGame(field, value) {
 //create game
 async function createGame() {
     // create a game number
+    let code = ""
+    while(true) {
+        code = generateCode();
+        if(!games.find((game) => game["code"] === code)) {
+            break;
+        }
+    }
     // get a random game
+    const gameIndex = Math.floor(Math.random() * baseGames.length)
     const game = {
-        code: 'fixme',
-        text: 'fixme'
+        code: code,
+        text: baseGames[gameIndex]
     }
     games.push(game);
     return game;
+}
+
+//generate code
+function generateCode() {
+    let gameCode = ""
+    for(var i = 0; i < 6; i++) {
+        // array[Math.floor(Math.random() * array.length)]
+        // const charIndex = Math.floor(Math.random() * possChars.length());
+        gameCode += possChars[Math.floor(Math.random() * possChars.length)];
+    }
+    return gameCode
 }
 
 //update game
