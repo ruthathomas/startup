@@ -64,8 +64,9 @@ app.delete('/api/auth', async (req, res) => {
 app.post('/api/game', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
+    const player = req.body.player;
     if(user) {
-        let game = await createGame();
+        let game = await createGame(player);
         // do some sort of authentication for game? prob. unnecessary
         return res.send({code: game.code, game: game.text});
     } else {
@@ -78,18 +79,39 @@ app.get('/api/game', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
     const code = req.headers.code;
+    const player = req.headers.player;
     const game = await getGame('code', code);
     if(user && game) {
+        game.players.push(player);
         res.send({code: code, game: game.text})
     } else {
         res.status(401).send({msg: 'Unauthorized :('});
     }
 })
 
+//update game
+app.put('/api/game', async (req, res) => {
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    const newGame = req.body.game;
+    const code = req.body.code;
+    // game is only coming in with replace indices and script
+    // we wanat to only replace the text part also
+    const index = games.findIndex(game => game.code === code);
+    if(index === -1) {
+        res.send('failed to update game :(');
+    } else {
+        games[index].text = newGame;
+        res.send({game: games[index].text});
+    }
+    //fixme and then we have to update the game I cry
+})
+
 //leave game
 app.delete('/api/game', async (req, res) => {
     const token = req.cookies['token'];
-    const user = await getUser('token', token);
+    // const user = await getUser('token', token);
+    res.send({});
     //fixme FIXME
 })
 
@@ -139,7 +161,7 @@ function getGame(field, value) {
 }
 
 //create game
-async function createGame() {
+async function createGame(player) {
     // create a game number
     let code = ""
     while(true) {
@@ -152,7 +174,8 @@ async function createGame() {
     const gameIndex = Math.floor(Math.random() * baseGames.length)
     const game = {
         code: code,
-        text: baseGames[gameIndex]
+        text: baseGames[gameIndex],
+        players: [player]
     }
     games.push(game);
     return game;
@@ -162,16 +185,11 @@ async function createGame() {
 function generateCode() {
     let gameCode = ""
     for(var i = 0; i < 6; i++) {
-        // array[Math.floor(Math.random() * array.length)]
-        // const charIndex = Math.floor(Math.random() * possChars.length());
         gameCode += possChars[Math.floor(Math.random() * possChars.length)];
     }
     return gameCode
 }
 
-//update game
-
-//verify game code
 
 //error handling
 

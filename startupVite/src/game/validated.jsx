@@ -51,6 +51,7 @@ export function Validated(props) {
     const [checkIfDone, setCheckIfDone] = React.useState(false);
     const [buttonVis, setButtonVis] = React.useState("hidden");
     const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
+    const [updateBoard, setUpdateBoard] = React.useState(false);
 
     const navigate = useNavigate();
     const username = props.username;
@@ -58,11 +59,12 @@ export function Validated(props) {
     const fadeTiming = { duration: 1000, iterations: 1};
 
     function quit() {
-        localStorage.removeItem('gameCode');
+        // localStorage.removeItem('gameCode');
         props.onGameAuthChange(GameAuthState.Unvalidated);
         navigate('/home');
     }
 
+    //FIXME this will need to be changed to a fetch request; should get a new game while maintaining the game code
     function changeGame() {
         const index = Math.floor(Math.random() * sampleGames.length);
         const newGame = sampleGames[index];
@@ -91,10 +93,13 @@ export function Validated(props) {
                 };
                 newElement.addEventListener("keyup", function(event) {
                     if(event.key === "Enter") {
-                        event.preventDefault();
+                        // event.preventDefault();
                         this.disabled = true;
-                        setCheckIfDone(true);
-                        setIsPlayerTurn(false);
+                        console.log(`this.textContent: ${this.value}`);
+                        // so we make this one alone disabled and then check through to find the disabled input, and then update the values in game, and then update game??
+                        // setCheckIfDone(true);
+                        // setIsPlayerTurn(false);
+                        setUpdateBoard(true);
                     }
                 })
             } else {
@@ -106,6 +111,50 @@ export function Validated(props) {
             gameContent.appendChild(newElement);
         }
     }
+
+    async function updateGame(newGame) {
+        const res = await fetch('/api/game', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({game: newGame, code: props.code})
+        });
+        const resData = await res.json();
+        console.log(`data: ${JSON.stringify(resData)}`);
+        if(res.ok) {
+            setCurrGame(resData.game);
+            setCheckIfDone(true);
+            setIsPlayerTurn(!isPlayerTurn);
+        } else {
+            alert('something went wrong :(');
+        }
+    }
+
+    useEffect(() => {
+        if(updateBoard) {
+            // run through elements here and find the input one that's disabled
+            // and then update the values in game, and then update game??
+            const element = document.getElementById("game-box");
+            const children = element.children;
+            for(var i = 0; i < children.length; i++) {
+                // check input (find the one that was entered into; do the first one only)
+                if(children[i].tagName === "INPUT") {
+                    if(children[i].disabled === true) {
+                        console.log(children[i].value);
+                        let newGame = currGame;
+                        newGame.script[i] = children[i].value;
+                        console.log(newGame.replace_indeces, i);
+                        newGame.replace_indeces.splice(0, 1);
+                        console.log(newGame.replace_indeces);
+                        // fixme okay so now you've updated the board, you need to set the game and do an update on the api
+                        updateGame(newGame);
+                        setUpdateBoard(false);
+                        // and then you should probably do check if done, and then also you can do change player
+                        break;
+                    }
+                }
+            }
+        }
+    }, [updateBoard]);
 
     function clearGame() {
         const gameContent = document.getElementById("game-box");
@@ -156,7 +205,6 @@ export function Validated(props) {
         setTimeout(() => {
             sendMessage('User beans joined!', false);
         }, 500)
-        // fixme; when you join, do: user joined! user joined! in the websocket box
     }, []);
 
     // populate the game box

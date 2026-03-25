@@ -32,7 +32,7 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
         const res = await fetch('/api/game', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({code: gameCode})
+            body: JSON.stringify({code: gameCode, player: username})
         });
         // the response is coming back with an empty body :'(
         const resData = await res.json();
@@ -53,7 +53,8 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
             // just make a header for code instead of the body
             headers: {
                 'Content-Type': 'application/json',
-                'code': gameCode
+                'code': gameCode,
+                'player': username
              }
             // body: JSON.stringify({code: gameCode})
         });
