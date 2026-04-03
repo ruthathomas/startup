@@ -60,15 +60,31 @@ export function Validated(props) {
 
     function quit() {
         // localStorage.removeItem('gameCode');
+        // FIXME I think you need to call the backend to remove the user from the game
+            // if the turn was that of the player who quit, simply pass play to the next person & remove
+            // otherwise, just remove the player from the rotation
         props.onGameAuthChange(GameAuthState.Unvalidated);
         navigate('/home');
     }
 
     //FIXME this will need to be changed to a fetch request; should get a new game while maintaining the game code
-    function changeGame() {
-        const index = Math.floor(Math.random() * sampleGames.length);
-        const newGame = sampleGames[index];
-        setCurrGame(newGame);
+    async function changeGame() {
+        const res = await fetch('/api/new-game', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({code: props.code})
+        });
+        //FIXME continue
+        const resData = await res.json();
+        console.log(`data: ${JSON.stringify(resData)}`);
+        if(res.ok) {
+            setCurrGame(resData.game);
+        } else {
+            alert('something went wrong :(');
+        }
+        // const index = Math.floor(Math.random() * sampleGames.length);
+        // const newGame = sampleGames[index];
+        // setCurrGame(newGame);
     }
 
     function changeElement() {

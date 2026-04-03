@@ -96,15 +96,33 @@ app.put('/api/game', async (req, res) => {
     const newGame = req.body.game;
     const code = req.body.code;
     // game is only coming in with replace indices and script
-    // we wanat to only replace the text part also
+    // we want to only replace the text part also
     const index = games.findIndex(game => game.code === code);
     if(index === -1) {
         res.send('failed to update game :(');
-    } else {
+    } else if (user) {
         games[index].text = newGame;
         res.send({game: games[index].text});
+    } else {
+        res.send('Unauthorized :(');
     }
     //fixme and then we have to update the game I cry
+})
+
+//new game
+app.put('/api/new-game', async (req, res) => {
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    const code = req.body.code;
+    const index = games.findIndex(game => game.code === code);
+    if(index === -1) {
+        res.send('failed to update game :(');
+    } else if(user) {
+        let game = getRandomGame(games[index].players, code);
+        return res.send({game: game.text});
+    } else {
+        res.send('Unauthorized :(');
+    }
 })
 
 //leave game
@@ -171,11 +189,15 @@ async function createGame(player) {
         }
     }
     // get a random game
-    const gameIndex = Math.floor(Math.random() * baseGames.length)
+    return getRandomGame([player], code);
+}
+
+function getRandomGame(players, code) {
+    const gameIndex = Math.floor(Math.random() * baseGames.length);
     const game = {
         code: code,
         text: baseGames[gameIndex],
-        players: [player]
+        players: players
     }
     games.push(game);
     return game;
