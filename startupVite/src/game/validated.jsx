@@ -57,12 +57,19 @@ export function Validated(props) {
     const username = props.username;
     const fadeAnimation = { color: "#00000000" };
     const fadeTiming = { duration: 1000, iterations: 1};
+    const code = props.code;
 
-    function quit() {
+    async function quit() {
         // localStorage.removeItem('gameCode');
         // FIXME I think you need to call the backend to remove the user from the game
             // if the turn was that of the player who quit, simply pass play to the next person & remove
             // otherwise, just remove the player from the rotation
+        const res = await fetch('/api/game', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', 'code': code , 'player': username },
+            })
+        const resData = await res.json();
+        console.log(`data: ${JSON.stringify(resData)}`);
         props.onGameAuthChange(GameAuthState.Unvalidated);
         navigate('/home');
     }
@@ -72,7 +79,7 @@ export function Validated(props) {
         const res = await fetch('/api/new-game', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({code: props.code})
+            body: JSON.stringify({code: code})
         });
         //FIXME continue
         const resData = await res.json();
@@ -132,7 +139,7 @@ export function Validated(props) {
         const res = await fetch('/api/game', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({game: newGame, code: props.code})
+            body: JSON.stringify({game: newGame, code: code})
         });
         const resData = await res.json();
         console.log(`data: ${JSON.stringify(resData)}`);
@@ -215,7 +222,7 @@ export function Validated(props) {
     // get game to populate game-box
     useEffect(() => {
         // changeGame();
-        console.log(props.code);
+        console.log(code);
         console.log(props.game);
         sendMessage(`User ${username} joined!`, false);
         setTimeout(() => {
@@ -307,7 +314,7 @@ export function Validated(props) {
     return(
         <div style={{alignItems: 'stretch'}} className="game">
             <div id="above-game">
-                <span>Game Code: {props.code}</span>
+                <span>Game Code: {code}</span>
                 <button onClick={() => quit()}>quit</button>
             </div>
             <div style={{marginBottom: 0}}>To play, type an answer in one box and hit enter :)</div>

@@ -68,28 +68,6 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
         }
     }
 
-    // async function setupGame(method) {
-    //     const res = await fetch('/api/game', {
-    //         method: method,
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({code: gameCode})
-    //     });
-    //     // the response is coming back with an empty body :'(
-    //     const resData = await res.json();
-    //     console.log(`data: ${JSON.stringify(resData)}`);
-    //     if(res.ok) {
-    //         //then do the things that you're supposed to do (change the game auth state, etc.)
-    //         console.log(`game code: ${resData.code}`)
-    //         setGameCode(resData.code);
-    //         console.log(`changed gamecode to: ${gameCode}`)
-    //         onGameAuthChange(GameAuthState.Validated);
-    //         // { state: {thing: thing} }
-    //         navigate('/game', { state: {code: resData.code, game: resData.game} });
-    //     } else {
-    //         alert('game authentication failed :(');
-    //     }
-    // }
-
     useEffect(() => {
         if(gameCode) {
             getGame();

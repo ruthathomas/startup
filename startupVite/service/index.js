@@ -68,7 +68,8 @@ app.post('/api/game', async (req, res) => {
     if(user) {
         let game = await createGame(player);
         // do some sort of authentication for game? prob. unnecessary
-        return res.send({code: game.code, game: game.text});
+        // fixme remove the player bit
+        return res.send({code: game.code, game: game.text, players: game.players});
     } else {
         return res.status(401).send({msg: 'Unauthorized :('});
     }
@@ -83,7 +84,8 @@ app.get('/api/game', async (req, res) => {
     const game = await getGame('code', code);
     if(user && game) {
         game.players.push(player);
-        res.send({code: code, game: game.text})
+        //fixme remove the players part because I don't want that sent necessarily
+        res.send({code: code, game: game.text, players: game.players})
     } else {
         res.status(401).send({msg: 'Unauthorized :('});
     }
@@ -102,7 +104,8 @@ app.put('/api/game', async (req, res) => {
         res.send('failed to update game :(');
     } else if (user) {
         games[index].text = newGame;
-        res.send({game: games[index].text});
+        //fixme remove the players bit later
+        res.send({game: games[index].text, players: games[index].players});
     } else {
         res.send('Unauthorized :(');
     }
@@ -128,8 +131,21 @@ app.put('/api/new-game', async (req, res) => {
 //leave game
 app.delete('/api/game', async (req, res) => {
     const token = req.cookies['token'];
-    // const user = await getUser('token', token);
-    res.send({});
+    const user = await getUser('token', token);
+    const code = req.headers.code;
+    const player = req.headers.player;
+    const gIndex = games.findIndex(game => game.code === code);
+    if(gIndex === -1) {
+        res.send('failed to leave game :(');
+    } else if(user) {
+        const pIndex = games[gIndex].players.findIndex(p => p === player);
+        let help = games[gIndex].players[pIndex]
+        games[gIndex].players.splice(pIndex, 1);
+        //fixme change this (remove players)
+        res.send({players: games[gIndex].players, msg: 'is this right??'});
+    } else {
+        res.send('unauthorized :(');
+    }
     //fixme FIXME
 })
 
