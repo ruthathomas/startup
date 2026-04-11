@@ -14,8 +14,9 @@ export default function App() {
   const [username, setUsername] = React.useState(localStorage.getItem('username') || '');
   // const [password, setPassword] = React.useState('');
   const currAuthState = username ? AuthState.Authenticated : AuthState.Unauthenticated;
+  const code = localStorage.getItem('code') || ''; //FIXME this isn't great but I'm troubleshooting
   const [authState, setAuthState] = React.useState(currAuthState);
-  const [gameState, setGameState] = React.useState(GameAuthState.GameUnvalidated);
+  const [gameState, setGameState] = React.useState(code? GameAuthState.Validated : GameAuthState.GameUnvalidated);
 
   localStorage.setItem('perpetualGameCode', 'ABCDE');
 

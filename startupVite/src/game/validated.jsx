@@ -59,9 +59,10 @@ export function Validated(props) {
     const fadeTiming = { duration: 1000, iterations: 1};
     const code = props.code;
 
+    localStorage.setItem('code', code);
+
     async function quit() {
-        // localStorage.removeItem('gameCode');
-        // FIXME I think you need to call the backend to remove the user from the game
+        // FIXME for websocket on removal:
             // if the turn was that of the player who quit, simply pass play to the next person & remove
             // otherwise, just remove the player from the rotation
         const res = await fetch('/api/game', {
@@ -71,17 +72,20 @@ export function Validated(props) {
         const resData = await res.json();
         console.log(`data: ${JSON.stringify(resData)}`);
         props.onGameAuthChange(GameAuthState.Unvalidated);
+        localStorage.removeItem('code');
         navigate('/home');
     }
 
-    //FIXME this will need to be changed to a fetch request; should get a new game while maintaining the game code
+    function flagGameChange(){
+        //fixme idk what I put this here for
+    }
+
     async function changeGame() {
         const res = await fetch('/api/new-game', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({code: code})
         });
-        //FIXME continue
         const resData = await res.json();
         console.log(`data: ${JSON.stringify(resData)}`);
         if(res.ok) {
@@ -89,9 +93,6 @@ export function Validated(props) {
         } else {
             alert('something went wrong :(');
         }
-        // const index = Math.floor(Math.random() * sampleGames.length);
-        // const newGame = sampleGames[index];
-        // setCurrGame(newGame);
     }
 
     function changeElement() {
@@ -100,7 +101,7 @@ export function Validated(props) {
     }
 
     function populateGame() {
-        setIsPlayerTurn(true);
+        // setIsPlayerTurn(true);
         const gameContent = document.getElementById("game-box");
         var numInputs = 0;
         for (let i = 0; i < currGame.script.length; i++) {
@@ -146,9 +147,31 @@ export function Validated(props) {
         if(res.ok) {
             setCurrGame(resData.game);
             setCheckIfDone(true);
-            setIsPlayerTurn(!isPlayerTurn);
+            // setIsPlayerTurn(!isPlayerTurn);
         } else {
             alert('something went wrong :(');
+        }
+    }
+
+    async function updateGameVisuals() {
+        const res = await fetch('/api/game/refresh', {
+            method: 'GET',
+            // just make a header for code instead of the body
+            headers: {
+                'Content-Type': 'application/json/refresh',
+                'code': code,
+                'player': username
+             }
+        });
+        const resData = await res.json();
+        console.log(`data: ${JSON.stringify(resData)}`);
+        if(res.ok) {
+            // if(currGame != resData.game) {
+            //     setCurrGame(resData.game);
+            // }
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -159,6 +182,9 @@ export function Validated(props) {
             const element = document.getElementById("game-box");
             const children = element.children;
             for(var i = 0; i < children.length; i++) {
+                if(!currGame.replace_indeces.includes(i)) {
+                    continue;
+                }
                 // check input (find the one that was entered into; do the first one only)
                 if(children[i].tagName === "INPUT") {
                     if(children[i].disabled === true) {
@@ -166,7 +192,7 @@ export function Validated(props) {
                         let newGame = currGame;
                         newGame.script[i] = children[i].value;
                         console.log(newGame.replace_indeces, i);
-                        newGame.replace_indeces.splice(0, 1);
+                        newGame.replace_indeces.splice(newGame.replace_indeces.indexOf(i), 1);
                         console.log(newGame.replace_indeces);
                         // fixme okay so now you've updated the board, you need to set the game and do an update on the api
                         updateGame(newGame);
@@ -232,10 +258,14 @@ export function Validated(props) {
 
     // populate the game box
     useEffect(() => {
+        // const updateOkay = updateGameVisuals();
+        // if(updateOkay) {   
+        // }
         // console.log('before clear game')
         clearGame();
         // console.log('before populateGame')
         populateGame();
+        // FIXME why is set button vis here?
         setButtonVis('hidden');
     }, [currGame]);
 

@@ -63,6 +63,7 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
         if(res.ok) {
             onGameAuthChange(GameAuthState.Validated);
             navigate('/game', { state: {code: gameCode, game: resData.game} });
+            // , username: username, gameState: GameAuthState.Validated
         } else {
             alert('game code invalid :(');
         }

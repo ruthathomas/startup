@@ -91,6 +91,21 @@ app.get('/api/game', async (req, res) => {
     }
 })
 
+//update game (for refresh purposes)
+app.get('/api/game/refresh', async (req, res) => {
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    const code = req.headers.code;
+    const player = req.headers.player;
+    const game = await getGame('code', code);
+    if(user && user.username === player && game) {
+        //fixme remove the players part because I don't want that sent necessarily
+        res.send({code: code, game: game.text, players: game.players})
+    } else {
+        res.status(401).send({msg: 'Unauthorized :('});
+    }
+})
+
 //update game
 app.put('/api/game', async (req, res) => {
     const token = req.cookies['token'];

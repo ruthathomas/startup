@@ -10,9 +10,12 @@ export function Game({ username, gameState, onGameAuthChange}) {
     const location = useLocation();
     // const {thing(s)} = location.state
     const {code, game} = location.state;
+    // , stateUser, stateGameState
 
     useEffect(() => {
         console.log(`code: ${code}`)
+        console.log(`username: ${username}`);
+        console.log(`gameState: ${gameState}`);
     }, []);
 
     return (

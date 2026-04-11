@@ -44,9 +44,14 @@ export function Unauthenticated(props) {
     //     // navigate('/home');
     // }
 
+    function setUser(name) {
+        setUsername(name);
+        localStorage.setItem('username', name);
+    }
+
     return(
         <div className="test">
-            <input display="block" type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
+            <input display="block" type="text" placeholder="username" value={username} onChange={(e) => setUser(e.target.value)}></input>
             <input display="block" type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}></input>
             <div>
                     <button onClick={() => handleLogin()} disabled={!username || !password}>login</button>
