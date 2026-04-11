@@ -166,11 +166,10 @@ export function Validated(props) {
         const resData = await res.json();
         console.log(`data: ${JSON.stringify(resData)}`);
         if(res.ok) {
-            // if(currGame != resData.game) {
-            //     setCurrGame(resData.game);
-            // }
+            //fixme; will complete with websocket
             return true;
         } else {
+            //fixme; will complete with websocket
             return false;
         }
     }

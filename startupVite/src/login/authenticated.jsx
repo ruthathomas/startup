@@ -14,7 +14,7 @@ export function Authenticated(props) {
     // }, []);
 
     function handleLogout() {
-        fetch('api/auth', {
+        fetch('/api/auth', {
             method: 'DELETE',
         });
         props.onLogout();

@@ -169,9 +169,35 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
 - [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
 - [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [x] **Backend service endpoints** - I added the following backend service endpoints:
+    - register
+    - login
+    - logout
+    - create game
+    - join game
+    - update game
+    - fetch new game
+    - leave game
+- [x] **Frontend calls service endpoints** - I called my service endpoints in the following places:
+    - validated.jsx
+        - quit game (DELETE call)
+        - get new game for code (PUT call)
+        - update game due to user input (PUT call)
+        - refresh game (GET call) - currently unused because it's dependent on the websocket stuff being complete (will be called whenever another player does something that changes/updates the game)
+    - home
+        - logout (DELETE call)
+        - create game (POST call)
+        - join game (GET call)
+    - unauthenticated
+        - login (POST call)
+        - register (POST call)
+    - authenticated
+        - logout (DELETE call)
 - [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+    - [ ] registration
+    - [ ] login
+    - [ ] logout
+    - [ ] restricted endpoint (//FIXME I guess I could do this with the game page??)
 
 ## 🚀 DB deliverable
 

@@ -91,7 +91,7 @@ app.get('/api/game', async (req, res) => {
     }
 })
 
-//update game (for refresh purposes)
+//update game (for refresh purposes) (currently unused)
 app.get('/api/game/refresh', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
