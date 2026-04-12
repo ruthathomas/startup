@@ -42,7 +42,7 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
             onGameAuthChange(GameAuthState.Validated);
             navigate('/game', { state: {code: resData.code, game: resData.game} });
         } else {
-            alert('game creation failed :(');
+            alert(`${resData.msg}`);
         }
     }
 

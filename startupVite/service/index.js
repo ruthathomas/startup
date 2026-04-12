@@ -60,13 +60,25 @@ app.delete('/api/auth', async (req, res) => {
     res.send({});
 })
 
+app.get('/api/auth/game', async (req, res) => {
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    if(user) {
+        res.send({code: user.inGame});
+    }
+    res.send({});
+})
+
 //start game
 app.post('/api/game', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
     const player = req.body.player;
-    if(user) {
+    if (user.inGame) {
+        return res.status(400).send({msg: `You are already playing game ${user.inGame}; please quit before joining another.`})
+    } else if(user) {
         let game = await createGame(player);
+        user.inGame = game.code;
         // do some sort of authentication for game? prob. unnecessary
         // fixme remove the player bit
         return res.send({code: game.code, game: game.text, players: game.players});
@@ -82,8 +94,13 @@ app.get('/api/game', async (req, res) => {
     const code = req.headers.code;
     const player = req.headers.player;
     const game = await getGame('code', code);
-    if(user && game) {
-        game.players.push(player);
+    if (user.inGame && user.inGame != game.code) {
+        return res.status(400).send({msg: `You are already playing game ${user.inGame}; please quit before joining another.`})
+    } else if(user && game) {
+        if(!user.inGame) {
+            user.inGame = game.code;
+            game.players.push(player);
+        }
         //fixme remove the players part because I don't want that sent necessarily
         res.send({code: code, game: game.text, players: game.players})
     } else {
@@ -143,7 +160,7 @@ app.put('/api/new-game', async (req, res) => {
     }
 })
 
-//leave game
+//leave game (fixme - do I need to )
 app.delete('/api/game', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
@@ -154,12 +171,16 @@ app.delete('/api/game', async (req, res) => {
         res.send('failed to leave game :(');
     } else if(user) {
         const pIndex = games[gIndex].players.findIndex(p => p === player);
-        let help = games[gIndex].players[pIndex]
+        // let help = games[gIndex].players[pIndex]
         games[gIndex].players.splice(pIndex, 1);
+        if(!games[gIndex].players) {
+            games.splice(gIndex, 1);
+        }
+        user.inGame = '';
         //fixme change this (remove players)
-        res.send({players: games[gIndex].players, msg: 'is this right??'});
+        res.send({msg: 'is this right??'});
     } else {
-        res.send('unauthorized :(');
+        res.send('Unauthorized :(');
     }
     //fixme FIXME
 })
@@ -194,6 +215,7 @@ async function createUser(username, password) {
     const user = {
         username: username,
         password: passwordHash,
+        inGame: ''
     };
     users.push(user);
     return user;
