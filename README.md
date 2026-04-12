@@ -166,9 +166,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - I don't know what explanation this needs? I used express for my http calls
 - [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
+- [x] **Calls to third party endpoints** - Added a call in `animals.jsx` to the same picture API as is used in the Simon example because using a fetch request on my bear picture API was causing me way too much trouble. Made it responsive to resizing.
 - [x] **Backend service endpoints** - I added the following backend service endpoints:
     - register
     - login
@@ -193,11 +193,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
         - register (POST call)
     - authenticated
         - logout (DELETE call)
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
-    - [ ] registration
-    - [ ] login
-    - [ ] logout
-    - [ ] restricted endpoint (//FIXME I guess I could do this with the game page??)
+- [x] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+    - [x] registration
+    - [x] login
+    - [x] logout
+    - [x] restricted endpoint - games can't be accessed unless a user is authenticated
+
+**Note: I removed the mock websocket functionality for this deliverable because it was messing things up; I will just implement actual websocket functionality when I do the websocket deliverable.**
 
 ## 🚀 DB deliverable
 

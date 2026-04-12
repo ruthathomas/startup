@@ -1,8 +1,12 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
+const cors = require('cors');
 const express = require('express');
+const fs = require('fs');
 const uuid = require('uuid');
 const app = express();
+
+app.use(cors());
 
 const authCookieName = 'token';
 const baseGames = [{
@@ -24,9 +28,25 @@ const possChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', '
 
 let users = [];
 let games = [];
-
+0
 app.use(express.json())
 app.use(cookieParser());
+
+// app.get('/api/bear', async (req, res) => {
+//     const dimension = req.headers.dimension;
+//     const res2 = await fetch(`https://placebear.com/${dimension}/${dimension}`,
+//         { responseType: "arraybuffer"}
+//     );
+//     // const resData = await res2.arrayBuffer();
+//     // const imageURL = await URL.createObjectURL(resData);
+//     // const resData = await res2.json();
+//     res.setHeader("Content-Type", "image/jpeg")
+//     if(res2.ok) {
+//         res.send({dataBuf: res2.data});
+//     } else {
+//         res.status(1887).send({msg: "wahh"});
+//     }
+// })
 
 //register - post
 app.post('/api/auth', async (req, res) => {
