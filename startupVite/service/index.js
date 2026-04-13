@@ -6,8 +6,6 @@ const fs = require('fs');
 const uuid = require('uuid');
 const app = express();
 
-app.use(cors());
-
 const authCookieName = 'token';
 const baseGames = [{
         title: "A Holiday Story",
@@ -25,12 +23,21 @@ const baseGames = [{
         replace_indeces: [4, 11, 20, 27, 28, 32, 47, 48, 54, 55, 57, 66, 67]
     }];
 const possChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
+
 
 let users = [];
 let games = [];
-0
+
+app.use(cors());
 app.use(express.json())
 app.use(cookieParser());
+app.use(express.static('public'));
+
+// mimicked this from the simon one because I wasn't sure what to do otherwise :')
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
 
 // app.get('/api/bear', async (req, res) => {
 //     const dimension = req.headers.dimension;
@@ -288,4 +295,4 @@ function generateCode() {
 
 //error handling
 
-app.listen(4000);
+app.listen(port);

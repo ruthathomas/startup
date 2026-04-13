@@ -167,7 +167,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **Node.js/Express HTTP service** - I don't know what explanation this needs? I used express for my http calls
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
+- [x] **Static middleware for frontend** - I made it so the app uses static so things can be served up from the public file, which just has a couple of svgs in it.
 - [x] **Calls to third party endpoints** - Added a call in `animals.jsx` to the same picture API as is used in the Simon example because using a fetch request on my bear picture API was causing me way too much trouble. Made it responsive to resizing.
 - [x] **Backend service endpoints** - I added the following backend service endpoints:
     - register
