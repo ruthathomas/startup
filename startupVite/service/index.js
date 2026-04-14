@@ -78,6 +78,7 @@ app.delete('/api/auth', async (req, res) => {
     res.send({});
 })
 
+// get code via user; ignore for now :')
 app.get('/api/auth/game', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
@@ -191,11 +192,10 @@ app.delete('/api/game', async (req, res) => {
         const pIndex = games[gIndex].players.findIndex(p => p === player);
         // let help = games[gIndex].players[pIndex]
         games[gIndex].players.splice(pIndex, 1);
-        if(!games[gIndex].players) {
+        if(games[gIndex].players.length === 0) {
             games.splice(gIndex, 1);
         }
         user.inGame = '';
-        //fixme change this (remove players)
         res.send({msg: 'is this right??'});
     } else {
         res.send('Unauthorized :(');
