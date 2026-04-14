@@ -49,6 +49,7 @@ export default function App() {
           />} exact />
         <Route path='/home' element={<Home 
           username={username}
+          authState={authState}
           onAuthChange={(username, authState) => {
               setUsername(username);
               setAuthState(authState);
@@ -60,13 +61,16 @@ export default function App() {
           />} />
         <Route path='/game' element={<Game
           username={username}
+          authState={authState}
           gameState={gameState}
           onGameAuthChange={(gameState) => {
             setGameState(gameState);
             console.log(gameState);
           }}
         />} />
-        <Route path='/animal' element={<Animal />} />
+        <Route path='/animal' element={<Animal 
+          authState={authState}
+        />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <footer>

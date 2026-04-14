@@ -5,8 +5,13 @@ import { GameAuthState } from './gameAuthState';
 import { UndefinedValState } from './undefinedValState';
 import { Unvalidated } from './unvalidated';
 import { Validated } from './validated';
+import { AuthState } from '../login/authState';
 
-export function Game({ username, gameState, onGameAuthChange}) {
+export function Game({ username, authState, gameState, onGameAuthChange}) {
+
+    if(authState === undefined) {
+            authState = AuthState.Unauthenticated;
+    }
 
     const location = useLocation();
     // const {thing(s)} = location.state
@@ -45,17 +50,20 @@ export function Game({ username, gameState, onGameAuthChange}) {
 
     return (
         <main style={{margin: 0}}>
-            {gameState === GameAuthState.Validated && code && (
+            {authState === AuthState.Authenticated && gameState === GameAuthState.Validated && code && (
                 <Validated username={username} onGameAuthChange={onGameAuthChange} code={code} game={game}></Validated>
             )}
-            {gameState === GameAuthState.Validated && !code && (
+            {authState === AuthState.Authenticated && gameState === GameAuthState.Validated && !code && (
                 <div>...failed to load game; please try again from the home page...</div>
             )}
-            {gameState === GameAuthState.Unvalidated && (
+            {authState === AuthState.Authenticated && gameState === GameAuthState.Unvalidated && (
                 <Unvalidated></Unvalidated>
             )}
-            {gameState === undefined && (
+            {authState === AuthState.Authenticated && gameState === undefined && (
                 <UndefinedValState></UndefinedValState>
+            )}
+            {authState === AuthState.Unauthenticated && (
+                <div>403: Unauthorized :(</div>
             )}
         </main>
     );

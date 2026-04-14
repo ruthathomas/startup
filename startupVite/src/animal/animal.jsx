@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthState } from '../login/authState';
 
-export function Animal() {
+export function Animal(authState) {
 
     const [imageURL, setImageURL] = React.useState('');
     const [width, setWidth] = React.useState(window.innerWidth);
     const [height, setHeight] = React.useState(window.innerHeight);
+
+    if(authState === undefined) {
+        authState = AuthState.Unauthenticated
+    }
 
     async function fetchImage() {
         const random = Math.floor(Math.random() * 1000);

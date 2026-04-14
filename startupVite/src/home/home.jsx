@@ -4,9 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthState } from '../login/authState';
 import { GameAuthState } from '../game/gameAuthState';
 
-export function Home({ username, onAuthChange, onGameAuthChange }) {
+export function Home({ username, authState, onAuthChange, onGameAuthChange }) {
     const navigate = useNavigate();
     const [gameCode, setGameCode] = React.useState('');
+
+    if(authState === undefined) {
+        authState = AuthState.Unauthenticated;
+    }
 
     async function handleJoinGame() {
         const enteredCode = document.getElementById('game-code').value;
@@ -80,24 +84,31 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
 
     return (
         <main>
-            <div className="test" style={{alignItems: "center", margin: 0, background: "#615A7C"}}>
-                <p><b>welcome to</b></p>
-                <h1>Bad Libs,</h1>
-                <p style={{fontSize: 1.5 + "rem"}}><b>✨ {username} ✨</b></p>
-            </div>
-            <div className="test">
-                <div>
-                    <button style={{flexGrow: 1}} onClick={() => handleCreateGame()}>create game</button>
-                </div>
-                <div>
-                    <input id="game-code" type="text" placeholder="game code"></input>
-                    <button onClick={() => handleJoinGame()}>join</button>
-                </div>
-                <div>
-                    <button style={{flexGrow: 1}} onClick={()=> handleLogout()}>logout</button>
-                </div>
-            </div>
-            <button style={{padding: 1 + 'rem', alignSelf: 'flex-start'}} id="surprise" onClick={() => navigate('/animal')}>surprise</button>
+            {authState === AuthState.Authenticated && (
+                <main style={{padding: 0, margin: 0}}>
+                    <div className="test" style={{alignItems: "center", margin: 0, background: "#615A7C"}}>
+                        <p><b>welcome to</b></p>
+                        <h1>Bad Libs,</h1>
+                        <p style={{fontSize: 1.5 + "rem"}}><b>✨ {username} ✨</b></p>
+                    </div>
+                    <div className="test">
+                        <div>
+                            <button style={{flexGrow: 1}} onClick={() => handleCreateGame()}>create game</button>
+                        </div>
+                        <div>
+                            <input id="game-code" type="text" placeholder="game code"></input>
+                            <button onClick={() => handleJoinGame()}>join</button>
+                        </div>
+                        <div>
+                            <button style={{flexGrow: 1}} onClick={()=> handleLogout()}>logout</button>
+                        </div>
+                    </div>
+                    <button style={{padding: 1 + 'rem', alignSelf: 'flex-start'}} id="surprise" onClick={() => navigate('/animal')}>surprise</button>
+                </main>
+            )}
+            {authState === AuthState.Unauthenticated && (
+                <div>403: Unauthorized :(</div>
+            )}
         </main>
     );
 }
