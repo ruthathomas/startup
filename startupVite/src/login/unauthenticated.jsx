@@ -16,18 +16,18 @@ export function Unauthenticated(props) {
 
     //create auth function
     async function createAuth(method) {
-        const res = await fetch(`/api/auth`, {
+        const res = await fetch('/api/auth', {
             method: method,
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({username: username, password: password})
         });
         console.log(res);
-        await res.json();
+        const resData = await res.json();
         if(res.ok) {
             props.onLogin(username);
             navigate('/home');
         } else {
-            alert('authentication failed :(');
+            alert(resData.msg);
         }
     }
 

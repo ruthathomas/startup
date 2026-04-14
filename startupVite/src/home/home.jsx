@@ -25,6 +25,7 @@ export function Home({ username, onAuthChange, onGameAuthChange }) {
         });
         //fixme do we need to wait here? to make sure everything is working properly?
         onAuthChange(username, AuthState.Unauthenticated);
+        localStorage.removeItem('username');
         navigate('/');
     }
 

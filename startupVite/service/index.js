@@ -1,8 +1,7 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
-const cors = require('cors');
+// const cors = require('cors');
 const express = require('express');
-const fs = require('fs');
 const uuid = require('uuid');
 const app = express();
 
@@ -29,31 +28,23 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 let users = [];
 let games = [];
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json())
 app.use(cookieParser());
 app.use(express.static('public'));
 
-// mimicked this from the simon one because I wasn't sure what to do otherwise :')
-app.use((_req, res) => {
-  res.sendFile('index.html', { root: 'public' });
-});
+//get authenticated sucker
+app.get('/api/auth/me', async (req, res) => {
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    //fixme do you really wanna send both these?
+    if(user) {
+        res.send({username: user.username, authenticated: 'true'});
+    } else {
+        res.status(401).send({msg: 'failed to get user idk idk'});
+    }
+})
 
-// app.get('/api/bear', async (req, res) => {
-//     const dimension = req.headers.dimension;
-//     const res2 = await fetch(`https://placebear.com/${dimension}/${dimension}`,
-//         { responseType: "arraybuffer"}
-//     );
-//     // const resData = await res2.arrayBuffer();
-//     // const imageURL = await URL.createObjectURL(resData);
-//     // const resData = await res2.json();
-//     res.setHeader("Content-Type", "image/jpeg")
-//     if(res2.ok) {
-//         res.send({dataBuf: res2.data});
-//     } else {
-//         res.status(1887).send({msg: "wahh"});
-//     }
-// })
 
 //register - post
 app.post('/api/auth', async (req, res) => {
@@ -212,6 +203,11 @@ app.delete('/api/game', async (req, res) => {
     //fixme FIXME
 })
 
+// Return the application's default page if the path is unknown
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
 //create cookie
 function createAuthCookie(res, user) {
     user.token = uuid.v4();
@@ -292,6 +288,9 @@ function generateCode() {
     return gameCode
 }
 
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+// });
 
 //error handling
 

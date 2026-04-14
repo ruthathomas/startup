@@ -6,11 +6,6 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:4000',
-      configure: (proxy, options) => {
-        proxy.on('proxyRes', (proxyRes, req, res) => {
-          proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-        });
-      },
     },
   },
   plugins: [react()],
