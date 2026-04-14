@@ -199,7 +199,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
     - [x] logout
     - [x] restricted endpoint - games can't be accessed unless a user is authenticated
 
-**Note: I removed the mock websocket functionality for this deliverable because it was messing things up; I will just implement actual websocket functionality when I do the websocket deliverable.**
+**Note: I removed the mock websocket functionality for this deliverable because it was messing things up; I will just implement actual websocket functionality when I do the websocket deliverable. Also, the login takes a couple of seconds to load...sorry about that.**
 
 ## 🚀 DB deliverable
 
