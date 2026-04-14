@@ -5,7 +5,19 @@ import { Unauthenticated } from './unauthenticated.jsx';
 export function Login({ username, authState, onAuthChange }) {
 
     if(authState === undefined) {
-        authState = AuthState.Unauthenticated;
+            getValidated();
+        }
+    
+    async function getValidated() {
+        const res = await fetch('/api/auth/me', {
+                method: "GET",
+            });
+        const data = await res.json();
+        if(data.validated === 'true') {
+            authState = AuthState.Authenticated;
+        } else {
+            authState == AuthState.Unauthenticated;
+        }
     }
 
     return (

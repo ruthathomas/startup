@@ -10,7 +10,19 @@ import { AuthState } from '../login/authState';
 export function Game({ username, authState, gameState, onGameAuthChange}) {
 
     if(authState === undefined) {
-            authState = AuthState.Unauthenticated;
+        getValidated();
+    }
+
+    async function getValidated() {
+        const res = await fetch('/api/auth/me', {
+                method: "GET",
+            });
+        const data = await res.json();
+        if(data.validated === 'true') {
+            authState = AuthState.Authenticated;
+        } else {
+            authState == AuthState.Unauthenticated;
+        }
     }
 
     const location = useLocation();
