@@ -382,3 +382,9 @@ fectch('url', {
 - RPC (Remote Procedure Calls) - "expose service endpoints as simple function calls"
 - REST (Representational State Transfer) - "attempts to take advantage of the foundational principles of HTTP"
 - GraphQL --> it's a query language
+
+**DB**
+- upload files w/ Multer NPM package on backend
+- don't store files on your server bc it's supposed to be temporary
+- it's good to have backups of things in case your server disappears
+- don't keep data base credentials in your code!! they can easily be stolen

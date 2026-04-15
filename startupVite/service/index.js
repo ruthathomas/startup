@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
+const DB = require('./database.js');
 
 const authCookieName = 'token';
 const baseGames = [{
@@ -35,13 +36,11 @@ app.use(express.static('public'));
 
 //get authenticated sucker
 app.get('/api/auth/me', async (req, res) => {
-    const token = req.cookies['token'];
-    const user = await getUser('token', token);
-    //fixme do you really wanna send both these?
+    const user = await getUser('token', req.cookies[authCookieName]);
     if(user) {
         res.send({username: user.username, authenticated: 'true'});
     } else {
-        res.status(401).send({msg: 'failed to get user idk idk'});
+        res.status(401).send({msg: 'Unauthorized :('});
     }
 })
 
@@ -52,7 +51,7 @@ app.post('/api/auth', async (req, res) => {
         res.status(409).send({msg: 'Username already exists'})
     } else {
         const user = await createUser(req.body.username, req.body.password);
-        createAuthCookie(res, user);
+        setAuthCookie(res, user.token);
         res.send({username: user.username});
     }
 })
@@ -61,21 +60,25 @@ app.post('/api/auth', async (req, res) => {
 app.put('/api/auth', async (req, res) => {
     const user = await getUser('username', req.body.username);
     if(user && (await bcrypt.compare(req.body.password, user.password))) {
-        createAuthCookie(res, user);
+        user.token = uuid.v4();
+        await DB.updateUser(user);
+        setAuthCookie(res, user);
         res.send({username: user.username});
     } else {
-        res.status(401).send({msg: 'Incorrect password :('})
+        res.status(401).send({msg: 'Unauthorized (incorrect password or user does not exist) :('})
     }
 })
 
 //logout - delete
 app.delete('/api/auth', async (req, res) => {
-    const token = req.cookies['token'];
-    const user = await getUser('token', token);
+    const user = await getUser('token', req.cookies[authCookieName]);
     if(user) {
-        deleteAuthCookie(res, user);
+        await DB.updateUserRemoveAuth(user);
+        // deleteAuthCookie(res, user);
     }
-    res.send({});
+    res.clearCookie(authCookieName);
+    res.status(204).end();
+    // res.send({});
 })
 
 // get code via user; ignore for now :')
@@ -209,13 +212,13 @@ app.use((_req, res) => {
 });
 
 //create cookie
-function createAuthCookie(res, user) {
-    user.token = uuid.v4();
-    res.cookie('token', user.token, {
-        secure: true,
-        httpOnly: true,
-        sameSite: 'strict'
-    });
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
 }
 
 //delete cookie
@@ -226,10 +229,14 @@ function deleteAuthCookie(res, user) {
 
 //get user
 function getUser(field, value) {
-    if (value) {
-        return users.find((user) => user[field] === value);
+    if(!value) {
+        return null;
     }
-    return null;
+    if (field == 'token') {
+        return DB.getUserByToken(value);
+        // return users.find((user) => user[field] === value);
+    }
+    return DB.getUser(value);
 }
 
 //create user
@@ -238,9 +245,10 @@ async function createUser(username, password) {
     const user = {
         username: username,
         password: passwordHash,
-        inGame: ''
+        inGame: '',
+        token: uuid.v4(),
     };
-    users.push(user);
+    await DB.addUser(user);
     return user;
 }
 
