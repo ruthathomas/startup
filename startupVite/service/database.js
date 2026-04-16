@@ -5,6 +5,8 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);
 const db = client.db('simon');
 const userCollection = db.collection('user');
+const gameCollection = db.collection('game');
+const defaultGames = db.collection('game');
 
 (async function testConnection() {
   try {
@@ -15,6 +17,16 @@ const userCollection = db.collection('user');
     process.exit(1);
   }
 })();
+
+function initDB(games) {
+    if(!defaultGames.findOne({index: 0})) {
+        defaultGames.insertMany(games);
+    }
+}
+
+function getBaseGame(index) {
+    return defaultGames.findOne({index: index});
+}
 
 function getUser(username) {
     return userCollection.findOne({username: username});
@@ -36,12 +48,34 @@ async function updateUserRemoveAuth(user) {
     await userCollection.updateOne({ username: user.username }, { $unset: { token: 1 } });
 }
 
+async function getGame(code) {
+    return gameCollection.findOne({code: code});
+}
+
+async function addGame(game) {
+    await gameCollection.insertOne(game);
+}
+
+async function updateGame(game) {
+    await gameCollection.updateOne({code: code}, {$set: game});
+}
+
+async function removeGame(game) {
+    await gameCollection.deleteOne({code: game.code});
+}
+
 module.exports = {
+  initDB,
+  getBaseGame,
   getUser,
   getUserByToken,
   addUser,
   updateUser,
   updateUserRemoveAuth,
+  getGame,
+  addGame,
+  updateGame,
+  removeGame
 };
 
 // THIS IS THE SAMPLE STUFF

@@ -37,7 +37,7 @@ export function Home({ username, authState, onAuthChange, onGameAuthChange }) {
         const res = await fetch('/api/game', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({code: gameCode, player: username})
+            body: JSON.stringify({code: gameCode})
         });
         // the response is coming back with an empty body :'(
         const resData = await res.json();
