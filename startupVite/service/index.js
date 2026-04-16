@@ -1,6 +1,5 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
-// const cors = require('cors');
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
@@ -29,10 +28,9 @@ const possChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', '
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 
-// let users = [];
+let users = [];
 let games = [];
 
-// app.use(cors());
 app.use(express.json())
 app.use(cookieParser());
 app.use(express.static('public'));
@@ -149,8 +147,9 @@ app.get('/api/game/refresh', async (req, res) => {
 //update game
 app.put('/api/game', async (req, res) => {
     const user = await getUser('token', req.cookies[authCookieName]);
-    const newGame = req.body.game;
+    let newGame = req.body.game;
     const code = req.body.code;
+    newGame.code = code;
     // game is only coming in with replace indices and script
     // we want to only replace the text part also
     // const index = games.findIndex(game => game.code === code);
@@ -178,14 +177,14 @@ app.put('/api/new-game', async (req, res) => {
     //     res.send('failed to update game :(');
     if(user) {
         const currGame = await DB.getGame(code);
-        let game = getRandomGame(currGame.players, code);
+        let game = await getRandomGame(currGame.players, code);
         return res.send({game: game.text});
     } else {
         res.send('Unauthorized :(');
     }
 })
 
-//leave game (fixme - do I need to )
+//leave game
 app.delete('/api/game', async (req, res) => {
     const user = await getUser('token', req.cookies[authCookieName]);
     const code = req.headers.code;
@@ -235,15 +234,14 @@ function deleteAuthCookie(res, user) {
 }
 
 //get user
-function getUser(field, value) {
+async function getUser(field, value) {
     if(!value) {
         return null;
     }
     if (field == 'token') {
-        return DB.getUserByToken(value);
-        // return users.find((user) => user[field] === value);
+        return await DB.getUserByToken(value.token);
     }
-    return DB.getUser(value);
+    return await DB.getUser(value);
 }
 
 //create user
@@ -325,5 +323,5 @@ async function initDBGames() {
     await DB.initDB(baseGames);
 }
 
-await initDBGames();
+initDBGames();
 app.listen(port);
